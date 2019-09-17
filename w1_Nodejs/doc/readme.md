@@ -49,6 +49,8 @@
         ```
     * 中间件分类
         * 内置中间件
+            * express.static()
+            * express.Router()
 * 数据接口编写
     * RESTful接口规范
         * 根据**请求类型**实现不同的接口
@@ -91,3 +93,29 @@
         * 响应
 * 路由
     * 动态路由：url地址中存在变量的路由
+
+* mysql
+    * sql语句
+    * 如何在nodejs中操作mysql
+        * 第三方模块：mysql
+            * createConnection()
+            * 连接对象
+                * connect()
+                * query()
+                * close()
+* npm install
+    * --save/-S         依赖
+    * --save-dev/-D     开发依赖
+    ```bash
+        npm i xxx --save-dev        #写入devDependencies
+        npm i xxx --save            #写入dependencies
+
+        npm i --production  #只安装dependencies中的依赖
+    ```
+
+* ES7
+    * async
+        * async函数返回一个promise对象
+    * await ：等待Promise对象的状态为Resolved时的返回结果
+        * await后必须是一个promise对象
+        * await必须写在async函数中
