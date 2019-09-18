@@ -28,8 +28,15 @@ Router.route('/')
 
     })
     // 查询所有
+    // /goods?page=1&size=10&sort=price,1
     .get(async (req,res)=>{
-        let sql = 'select * from goods';
+        let {size=10,page=1,price} = req.query;
+        let sql = `select * from goods limit ${(page-1)*size},${size}`;
+
+        if(sort){
+            sort = sort.split(',')
+            sql += ` order by ${sort[0]} ${sort[1]==1?'asc':'desc'}`
+        }
         // 回调写法
         // db.query(sql,(result)=>{
         //     res.send(reslut)

@@ -119,3 +119,73 @@
     * await ：等待Promise对象的状态为Resolved时的返回结果
         * await后必须是一个promise对象
         * await必须写在async函数中
+
+
+## day2-3
+
+## 模拟面试要求
+* 自我介绍
+    * 姓名
+    * 来自哪里
+    * 擅长领域
+    * 上一份工作情况
+    * 最近做的项目
+* 提问环节
+    * 技术问题
+    * 人事问题
+    * 逻辑思维
+### 复习
+* Express中间件
+    * 分类
+        * 内置中间件
+            * express.static()
+            * express.Router()
+            * express.urlencoded()
+            * express.json()
+        * 第三方中间件
+            * body-parser
+            * ...
+        * 自定义中间
+        ```js
+            function(req,res,next){}
+        ```
+    * 使用
+        * app.use([path],...middleware)
+        * get()
+        * post()
+        * patch/put
+        * delete
+        * ....
+
+* 请求和响应
+    * request
+        * url           url参数：express会把url参数格式化到request.query
+        * body          请求体：express需要使用express.urlencoded()/express.json()中间件格式化到request.body
+        * header        请求头：通过request.get()获取请求头数据
+    * response
+* 接口编写
+    * RESTful API规范
+        * 请求类型
+        * url地址
+    * 利用模块化开发编写数据接口
+* 数据库
+    * mysql
+        * sql语句
+        * 拼接sql语句
+
+### 知识点
+* 数据库分类
+    * 关系型数据库
+        * mysql         免费（甲骨文收购）
+        * SQLServer     收费（微软）
+        * Oracle        收费（甲骨文）
+        * mariaDB       永久免费（）
+    * 非关系型数据
+        * MongoDB   bson(binary json)
+    * 对比
+                    关系型数据库        非关系型数据库
+        数据库       database           database
+        表           table              collection
+        数据         row                document
+
+* MongoDB操作
