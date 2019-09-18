@@ -189,3 +189,50 @@
         数据         row                document
 
 * MongoDB操作
+    * CRUD
+        * Create
+        * Delete
+        * Update
+        * Retrieve
+    * 在NodeJS中操作mongoDB
+        * mongodb（推荐）
+        * mongoose
+* try...catch
+    * 重要
+### 面试题
+* 作用域的理解
+    * 全局作用域：window
+    * 局部作用：函数内
+    * 块级作用域：{}
+        * let
+        * const
+* let const var的区别
+    * var 声明提前，let const没有
+    * let,const有块级作用域，var没有
+    * const声明常量，let,var声明变量
+
+* 模块化规范有哪些
+    * AMD       前端，异步，require.js
+        * 引入：require()
+        * 导出：define()
+    * CMD       前端，异步，sea.js
+    * CommonJS  后端，同步，node.js
+        * 引入：require()
+        * 导出：module.exports
+    * ESModule
+    ```js
+        // 异步
+        require(['jquery'],($)=>{
+
+        })
+
+        //同步
+        let $ = require('jquery');
+    ```
+* 默认端口
+    * mysql     : 3306
+    * mongodb   : 27017
+    * http      : 80
+    * https     : 443
+
+

@@ -25,7 +25,7 @@ const {mysql:query} = require('../db');
 
 Router.route('/')
     .post((req,res)=>{
-
+        
     })
     // 查询所有
     // /goods?page=1&size=10&sort=price,1
