@@ -19,7 +19,10 @@ async function connect(){
     }) */
     let result;
     try{
-        let client = await MongoClient.connect(DBurl);
+        let client = await MongoClient.connect(DBurl,{ 
+            useNewUrlParser: true, 
+            useUnifiedTopology: true 
+        });
         let db = client.db(DBName);
         result = {client,db}
     }catch(err){

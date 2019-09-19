@@ -9,11 +9,29 @@ const express = require('express');
 const Router = express.Router();
 
 const {mongo} = require('../db')
+const {formatData} = require('../utils')
+
+const colName = 'user'
 
 // 注册
 // /user/reg
-Router.post('/reg',(req,res)=>{
+Router.post('/reg',async (req,res)=>{
+    let {username,password} = req.body;
 
+    let result = await mongo.create(colName,[{username,password,regtime:Date.now()}]);
+
+    res.send(result);
+})
+
+Router.get('/check',async (req,res)=>{
+    let {username} = req.query;
+
+    let result = await mongo.find(colName,{username});
+    if(result.length){
+        res.send(formatData({code:0}))// {code:1,msg:'success',data}
+    }else{
+        res.send(formatData());
+    }
 })
 
 // 查询所有用户

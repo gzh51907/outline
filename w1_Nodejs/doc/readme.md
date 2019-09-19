@@ -235,4 +235,73 @@
     * http      : 80
     * https     : 443
 
+## day6-4
+
+### 面试题
+* 闭包
+    * 引用计数法
+    * 标记清除法
+    ```js
+        function show(){
+            var a = 10;
+            var b = 20;
+
+            var obj1 = {username:'laoxie',nickname:obj2.username}
+            var obj2 = {username:'laoyao',nickname:obj1.username}
+
+            return function(){
+
+            }
+        }
+
+        let res = show();
+    ```
+* 跨域解决方案
+    * 为什么存在跨域
+        * 客户端语言
+    * 解决方法
+        * JSONP
+            * 需要目标服务器的支持
+            * script src="xxx.php"
+            * 发送全局函数名
+            * 接口必须返回js代码，js代码为全局函数的执行代码
+            ```html
+                <script src="/xxx.php?callback=getData"></script>
+                <script src="/xxx.js?callback=getData"></script>
+                <script src="/goods/a?callback=getData"></script>
+
+                //后端返回js代码
+                // php: echo 
+                // nodejs: req.query.callback
+                req.query.callback +'('+我的数据+')' // geData(我的数据)
+            ```
+
+        * CORS
+            * 需要目标服务器的支持
+            * 设置响应头
+                * Access-Control-Allow-Origin
+                * Access-Control-Allow-Methods
+                * Access-Control-Allow-Headers
+        * 服务器代理
+* npm安装模块
+    * 全局安装
+        * 为了在命令行执行模块
+        * 环境变量：操作系统的变量
+    * 局部安装
+        * 为了用require()引入模块
+
+### 复习
+* MongoDB
+    * 环境安装
+    * 操作
+        * 命令行
+        * 可视化工具Robo 3T
+        * NodeJS中操作Mongo
+            * mongodb
+            * mongoose
+    * document操作
+        * CRUD
+
+### 知识点
+* 统一返回数据格式
 
