@@ -308,6 +308,46 @@
 
 
 ## day2-5
+### 面试题
+* 阻止冒泡与默认行为
+    * e.stopPropagation()
+    * e.preventDefault()
+    * return false;
+* 属性访问规则（原型链）
+    * 当前对象->原型对象->...->Object.prototype（undefined）
+* 变量访问规则（作用域链）
+    * 当前作用域->上级作用域...->全局作用（xxx is not defined）
+    ```js
+        // 面试题
+        var a = 10;
+        function show(){
+            console.log(a);
+            let a = 20;
+        }
+
+        show();//10,undefined,10,undefined
+    ```
+* git常用命令
+    * 初始化
+        * git clone
+        * git init
+        * git remote
+    * 常用
+        * git add
+        * git commit
+        * git status
+    * 推送拉取
+        * git push
+        * git pull(git fetch & git merge)
+    * 分支
+        * git branch
+        * git checkout
+    * 版本回退
+        * git log
+        * git reset
+        * git tag
+        * git rebase
+        ....
 
 ### 知识点
 * 7天免登录
@@ -331,4 +371,19 @@
             4. 以后每次请求后台都要携带token，后端进行实时校验（有效期和是否被篡改）
                 * 通过则放行
                 * 不通过则跳到登录界面
+
+* 协议
+    * HTTP/HTTPS    短连接
+    * TCP
+    * UDP
+    * WebSocket: 
+        * 长连接: 连接成功后不会断开
+        * 服务器可以主动发起请求
+* 在不支持websocket的浏览器下实现直播功能
+    * 轮询
+
+* 多人聊天室（WebSocket）
+    * 前端
+    * 后端
+    
 
