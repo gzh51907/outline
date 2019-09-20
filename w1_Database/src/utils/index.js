@@ -1,3 +1,5 @@
+const token = require('./token')
+
 function formatData({code=1,msg='success',data=[]}={}){
 
     if(code === 0){
@@ -11,6 +13,8 @@ function formatData({code=1,msg='success',data=[]}={}){
     }
 }
 
+
 module.exports = {
-    formatData
+    formatData,
+    token
 }
