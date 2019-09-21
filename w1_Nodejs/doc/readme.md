@@ -452,3 +452,6 @@
         * CORS(Cross Origin Resource Sharing)
             * 需要服务器支持
         * 服务器代理
+            * 有接口但无授权
+        * 爬虫
+            * 无接口无权限

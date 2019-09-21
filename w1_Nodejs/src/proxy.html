@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Proxy</title>
+</head>
+<body>
+    <h1>Proxy请求</h1>
+    <script>
+        /*
+            Proxy
+                
+        */
+        let xhr = new XMLHttpRequest();
+        xhr.onload = ()=>{
+            console.log('res:',JSON.parse(xhr.responseText))
+        }
+        // xhr.open('post','http://www.360kad.com/product/GetSecKillList?channelCode=1032020&sort=4&type=1&externalCall=true&_=1569046567235',true);
+        // http://www.360kad.com/product/GetNowActivityList?productId=128303&rd=0.26030959329001235
+        // xhr.open('get','/kad/product/GetSecKillList?channelCode=1032020&sort=4&type=1&externalCall=true&_=1569046567235',true)
+        xhr.open('get','/kad/product/GetNowActivityList?productId=128303&rd=0.26030959329001235',true)
+        xhr.send();
+
+
+
+        
+       
+    </script>
+</body>
+</html>
