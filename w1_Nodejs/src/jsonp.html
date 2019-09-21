@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JSONP</title>
+</head>
+<body>
+    <h1>JSONP请求</h1>
+    <script>
+        // let xhr = new XMLHttpRequest();
+        // xhr.open('get','http://localhost:1907/jsonp',true);
+        // xhr.send();
+
+        /*
+            JSONP原理：
+            * 操作步骤
+                * 客户端：利用Script能访问任意url的特性，给接口发送全局函数名
+                * 服务端：接收全局函数名，并拼接函数执行的js代码
+        */
+       (function(){
+
+           window.getData = function(data){
+                console.log('data:',data);
+
+                document.head.removeChild(myscript)
+           }
+            
+            let myscript = document.createElement('script');
+            myscript.src = 'http://localhost:1907/jsonp?callback=getData';
+            // 返回getData(123)
+           
+            document.head.appendChild(myscript);
+       })()
+    </script>
+</body>
+</html>

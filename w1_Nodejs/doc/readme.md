@@ -385,5 +385,70 @@
 * 多人聊天室（WebSocket）
     * 前端
     * 后端
-    
 
+## day2-6
+
+### 面试题
+* jquery链式调用原理
+```js
+    // let jq = new jQuery();//this
+    // jQuery.prototype.show = function(){
+        // 
+        // return this
+    //}
+    // jq.show()
+    // jq.html()
+    $('div.box').show().html('显示')
+
+    $('div.box').css('background-color');// #58bc58
+    $('div.box').css('background-color','#f00').show()
+
+    jQuery.prototype.css = function(key,val){
+        //...
+        if(val !== undefined){
+            return this
+        }else{
+            return this[0].getComputedStyle()[key]
+        }
+    }
+```
+* 前端优化有哪些方式
+    * 性能优化
+        * 减少http请求
+            * 精灵图
+            * 压缩合并
+            * 使用缓存
+                * 自动缓存
+                * 手动缓存
+            * CDN
+            * SSR   服务器渲染（首屏渲染）
+            
+    * 开发优化
+        * 模块化
+        * 代码优化
+    * 用户体验优化
+    * 兼容性优化
+        * 浏览器
+        * 平台
+
+### 知识点
+* BSR   客户端渲染（Browser Side Rendering 前后端分离）
+    1. 输入url地址->请求html文件->返回客户端执行（无数据html代码）
+    2. 解析js代码 ->请求ajax->返回数据给客户端
+    3. 客户端解析数据，渲染内容
+    * 缺点
+        * 速度慢
+        * SEO不友好
+    * 优点
+        * 用户交互
+* SSR   服务器渲染(Server Side Rendering)
+    1. 输入url地址->请求html文件->返回有数据的html代码
+
+* 跨域解决方案
+    * 同源策略：ajax请求要求当前网站与目标网站协议、域名、端口三者一致
+    * 解决方案
+        * JSONP(json with Padding)
+            * 需要服务器的支持
+        * CORS(Cross Origin Resource Sharing)
+            * 需要服务器支持
+        * 服务器代理

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JSONP</title>
+</head>
+<body>
+    <h1>CORS请求</h1>
+    <script>
+        /*
+            CORS
+                * 服务端：设置响应头
+                    * Access-Control-Allow-Origin:'http://www.baidu.com'
+                    * Access-Control-Allow-Headers:'Content-Type,Authorization'
+                    * Access-Control-Allow-Methods:'GET,POST,PATCH,PUT,DELETE'
+                * 需要浏览器的支持
+        */
+        let xhr = new XMLHttpRequest();
+        xhr.onload = ()=>{
+            console.log('res:',xhr.responseText)
+        }
+        xhr.open('post','http://localhost:1907/cors',true);
+        xhr.setRequestHeader('Authorization','klasdlkasdlkaslklasd');
+        xhr.send();
+
+        
+       
+    </script>
+</body>
+</html>
