@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>02.响应式数据的原理</title>
+    <script src="./assets/js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{name}}
+    </div>
+
+    <script>
+        /*
+            * 响应式属性    
+                >能根据数据的修改自动更新视图
+                * 原理
+                    * 属性特性
+                    * 存储器属性
+            * 属性特性（更深入控制对象的属性）
+                * 修改方式：Object.defineProperty(target,prop,descriptor)
+                    * taget: 目标对象
+                    * prop: 目标对象的属性
+                    * descriptor： 属性特性
+                * 查看属性特性：Object.getOwnpropertyDescriptor(data,prop)
+                * 值属性（有值的属性）
+                    * configurable  可配置型    Boolean     控制writable&enumerable的开关
+                    * enumerable    可枚举性    Boolean
+                    * writable      可写性      Boolean
+                    * value         值          Any
+                * 存储器属性（没有值的属性）
+                    * configurable
+                    * enumerable
+                    * get
+                    * set
+                
+                * 注意事项：
+                    1. 传统方式*创建*的属性，属性特性默认为true
+                    2. 通过Object.defineProperty创建的属性，属性特性默认为false
+        */
+        let data = {
+            name:'h5-1907',
+            qty:46,
+            niubility:true
+        }
+
+        // 设置name属性不可修改
+        // Object.defineProperty(data,'name',{
+        //     writable:false
+        // })
+
+        // // 设置niubility为不可枚举（不可遍历）
+        // Object.defineProperty(data,'niubility',{
+        //     enumerable:false
+        // });
+
+        // // 利用Object.defineProperty创建的属性
+        // Object.defineProperty(data,'nickname',{
+        //     value:'牛x班级'
+        // })
+
+        // // data.name = 'laoxie'
+
+        // for(var key in data){
+        //     console.log(key +':' + data[key])
+        // }
+
+        // 添加存储性属性
+        // Object.defineProperty(data,'firstName',{
+        
+        //     // 读取属性时，执行get函数中的代码
+        //    get(){
+        //        let arr = this.name.split('-')
+        //        return arr[0]
+        //    },
+        //    // 设置属性时，执行set函数中的代码，并传入修改的值
+        //    set(val){
+        //         let arr = this.name.split('-')
+        //         arr[0] = val;
+        //         this.name = arr.join('-');
+        //    }
+        // })
+
+
+        // 实例化
+        let vm = new Vue({
+            el:'#app',
+            data:data
+        })
+
+        // console.log(vm)
+
+        // 以前的做法（节点操作）
+        // 写入
+        // let app = document.getElementById('app')
+        // app.innerHTML = data.name
+
+        // // 更新视图
+        // Object.defineProperty(data,'showname',{
+        //     get(){
+        //         return this.name
+        //     },
+        //     set(val){
+        //         this.name = val;
+
+        //         // 更新视图
+        //         app.innerHTML =val;
+        //     }
+        // })
+    </script>
+</body>
+</html>

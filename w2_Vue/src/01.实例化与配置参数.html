@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue的使用</title>
+    <script src="./assets/js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 写在app中的数据/变量，都是实例对象的属性 -->
+        <h1>{{username}}</h1>
+        {{age}}
+    </div>
+    <script>
+        /**
+            实例化Vue
+                * 配置参数
+                    * el
+                    * data
+                * 绑定数据到视图
+                    * {{}}
+                    * 实时更新
+        */
+       let laoxie = {
+           username:'laoxie',
+           age:18
+       }
+       //以前的写法
+        // let app = document.querySelector('#app');
+        // app.innerText = laoxie.username;
+
+        let vm = new Vue({
+            el:'#app',
+            data:laoxie
+        })
+
+        console.log(vm);
+    </script>
+</body>
+</html>
