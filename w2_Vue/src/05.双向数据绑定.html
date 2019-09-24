@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>05.双向数据绑定</title>
+    <script src="./assets/js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>姓名：{{username}}</p>
+        <p>年龄：{{age}}</p>
+        <input type="text" v-bind:value="age" v-on:input="changeAge">
+    </div>
+    <script>
+        /*
+            05.双向数据绑定
+                * 双向数据绑定：靠ViewModel层实现
+                    * Model -> View
+                        * 原理：响应式属性（getter&setter&）
+                    * View -> Model
+                        * 原理：事件
+                    * v-model
+                        * v-bind + v-on
+            * 数据绑定方式
+                * 单向数据绑定
+                    * {{}}  一般用于标签的内容
+                    * v-bind:attr   
+                * 双向数据绑定
+                    * v-model
+            
+            * 事件绑定
+                * v-on
+
+        */
+        // 视图->数据的原理：事件
+        // var testData = {score:80}
+        // var score = document.getElementById('score')
+        // score.oninput = function(){console.log(this.value)
+        //     testData.score = this.value;
+        // }
+
+        let data = {username:'laoxie',age:18}
+       
+        let vm = new Vue({
+            el:'#app',
+            data,
+
+            methods:{
+                changeAge:function(e){
+                    data.age = e.target.value;
+                }
+            }
+        });
+
+        // Model -> View
+        data.age = 20;
+
+        // View -> Model
+
+    </script>
+</body>
+</html>

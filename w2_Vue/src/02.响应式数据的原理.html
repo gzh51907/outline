@@ -43,7 +43,14 @@
         let data = {
             name:'h5-1907',
             qty:46,
-            niubility:true
+            niubility:true,
+            _score:80,
+            get score(){
+                return this._score
+            },
+            set score(val){
+                this._score = val;
+            }
         }
 
         // 设置name属性不可修改

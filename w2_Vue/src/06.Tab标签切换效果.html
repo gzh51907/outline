@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>06.Tab标签切换效果</title>
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.css">
+    <script src="./assets/js/vue.js"></script>
+    <style>
+        .tabs{padding:10px;}
+    </style>
+</head>
+
+<body>
+    <h1>06.Tab标签切换效果</h1>
+    <div id="app">
+        <div class="tabs">
+            <ul class="nav nav-tabs">
+                <!-- <li v-for="(item,idx) in tabs" v-bind:class="idx===currentIdx?'active':''"><a href="#">{{item.username}}</a></li> -->
+                <!-- v-on:click="currentIdx=idx" -->
+                <li 
+                v-for="(item,idx) in tabs" 
+                v-bind:class="{active:idx===currentIdx}" 
+                v-on:click="changeTab(idx)">
+                    <a href="#">{{item.username}}</a>
+                </li>
+            </ul>
+            <div v-for="(item,idx) in tabs" v-show="idx===currentIdx" style="padding:15px;">{{item.username}} 最爱 {{item.hobby}}</div>
+        </div>
+    </div>
+    <script>
+        /**
+         *  关注点的改变：节点 -> 数据
+         
+            指令
+                * v-bind    简写 :
+                * v-model
+                * v-on      简写 @
+                * v-for
+                    * in
+                * v-show    显示隐藏
+                * v-if      插入删除
+         */
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                currentIdx:0,
+                tabs: [{
+                    username: 'laoxie',
+                    hobby: '写代码'
+                }, {
+                    username: 'jingjing',
+                    hobby: '大保健'
+                }, {
+                    username: 'laoyao',
+                    hobby: '看jingjing做大保健'
+                }, {
+                    username: 'xiaoxie',
+                    hobby: '跟着老姚看jingjing做大保健'
+                }]
+            },
+            methods:{
+                changeTab(idx){console.log(idx)
+                    // this指向实例
+                    this.currentIdx = idx
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

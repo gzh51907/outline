@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>04.架构模式</title>
+    <script src="./assets/js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>姓名：{{username}}</p>
+        <p>年龄：{{age}}</p>
+    </div>
+    <script>
+        /*
+            04.架构模式
+                * 分层
+                    * MVC
+                        * M: Model      数据            
+                        * V: View       视图            
+                        * C：Controller 控制器          
+                    * MVP
+                    * MVVM
+                        * M                             data
+                        * V                             div#app
+                        * VM                            vm
+                    
+                * 双向数据绑定
+                    * Model -> View
+                    * View -> Model
+
+        */
+
+        let data = {username:'laoxie',age:18}
+       
+        let vm = new Vue({
+            el:'#app',
+            data
+        });
+
+        // Model -> View
+        data.age = 20;
+
+        // View -> Model
+    </script>
+</body>
+</html>
