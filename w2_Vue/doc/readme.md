@@ -83,6 +83,20 @@
     * 是一门基于对象的语言
         * js中一切皆对象
 * XSS攻击
+* async & await的理解
+    * ES7
+* script属性
+    * type  text/javascript
+    * src
+    * async     加载完成立即执行js
+    * defer     推迟执行
+    ```html 
+        <head>
+        <script src="xxx.js" defer></script> 
+        <script src="xxx.js" async></script>
+        </header>
+        <body></body>
+    ```
 
 ## 复习
 * Vue
@@ -110,3 +124,15 @@
         * v-if/v-else/v-else-if
     * 特殊属性
         * ref
+    * 实例化配置参数
+        * el
+        * data
+        * computed
+        * methods
+    * Vue实例属性/方法(vm.xx)
+        * $refs
+        * $event
+        * $el
+        * $data
+
+        * $set()：Vue.set()的别名

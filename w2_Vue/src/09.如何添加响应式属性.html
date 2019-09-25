@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>09.如何添加响应式属性</title>
+    <script src="./assets/js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>09.如何添加响应式属性</h1>
+        <h3>用户名：{{username}}</h3>
+        <dl>
+            <dt>成绩</dt>
+            <dd v-for="(item,key,idx) in score">
+                {{idx+1}} - {{key}} ： {{item}}
+            </dd>
+        </dl>
+        <button @click="addScore('wuli')">物理</button>
+        <button @click="addScore('huaxue')">化学</button>
+        <p v-for="item in hobby">{{item}}</p>
+    </div>
+    <script>
+        /**
+            09.如何添加响应式属性
+                * 实例化时配置data
+                * Vue.set(target,key,value)/vm.$set()
+                    * target不能是vm,也不能是vm.data
+                * 数组的变异方法
+         */
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                username:'laoxie',
+                score:{
+                    math:148,
+                    chinese:120,
+                    english:110,
+                },
+                hobby:['写代码','小保健','会所']
+            },
+            methods:{
+                addScore(xueke){
+                    // Vue.set(vm.score,'wuli',100)
+                    this.$set(this.score,xueke,100)
+                }
+            }
+        })   
+        
+        // setTimeout(()=>{
+        //     Vue.set(vm.score,'wuli',100)
+        // },3000)
+    </script>
+</body>
+</html>

@@ -26,7 +26,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>全选</th>
+                    <th><input type="checkbox" v-model="checkAll"/>全选</th>
                     <th>#</th>
                     <th>待办事项</th>
                     <th>预计完成事件</th>
@@ -35,16 +35,16 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(item,idx) in datalist">
-                    <td><input type="checkbox" /></td>
+                <tr v-for="(item,idx) in datalist" @click="selectItem(idx)">
+                    <td><input type="checkbox" v-model="item.selected" /></td>
                     <td>{{idx+1}}</td>
                     <td>{{item.content}}</td>
                     <td>{{item.date}}</td>
                     <td>{{item.done ? '是':'否'}}</td>
                     <td>
                         <div class="btn-group btn-group-sm">
-                            <button class="btn btn-default" type="submit" @click="completeItem(idx)">完成</button>
-                            <button class="btn btn-danger" type="submit" @click="removeItem(idx)">删除</button>
+                            <button class="btn btn-default" type="submit" @click.stop.once="completeItem(idx)">完成</button>
+                            <button class="btn btn-danger" type="submit" @click.stop="removeItem(idx)">删除</button>
                         </div>
                     </td>
                 </tr>
@@ -58,19 +58,54 @@
             * 删
             * 改
             * 查
+
+            computed：就是getter&setter
+            事件处理函数
+                * event 默认事件处理函数的第一个参数为event
+                * 如果手动往事件处理函数传参，默认没有event
+                * 事件触发时，event对象会存入vm实例的属性vm.$event
+                * 事件修饰符
+                * event.target          事件源对象
+                * event.currentTarget   绑定事件的元素
          */
 
         let vm = new Vue({
             el: '#app',
             data: {
+                // checkAll:false,
                 keyword:'',
                 date:'',
                 datalist: [{
                     id: 1,
                     content: '先定个小目标，赚他5个亿',
                     done: false,
-                    date: '2019-12-25'
+                    date: '2019-12-25',
+                    selected:false
                 }]
+            },
+            computed:{
+                // computed中的属性为存储器属性，在computed中this指向vm实例
+                // checkAll:function(){
+                //     // getter
+                //     return false
+                // }
+                checkAll:{
+                    get(){
+                        // 被动：所有数据的值修改影响checkAll
+                        // res = true;
+                        // this.datalist.forEach(item=>{
+                        //     if(!item.selected)
+                        //     res = false;
+                        // })
+                        // return res;
+
+                        return this.datalist.every(item=>item.selected);
+                    },
+                    set(val){
+                        // 主动修改：checkAll的值影响所有数据的值
+                        this.datalist.forEach(item=>item.selected=val);
+                    }
+                }
             },
             methods:{
                 addItem(){
@@ -78,7 +113,8 @@
                         id:this.datalist.length+1,
                         content:this.keyword,
                         done:false,
-                        date:this.date
+                        date:this.date,
+                        selected:false
                     }
                     this.datalist.unshift(data)
 
@@ -87,14 +123,24 @@
                     // 通过this.$refs.keyword获取到节点
                     this.$refs.keyword.focus();
                 },
-                removeItem(idx){
-                    this.datalist.splice(idx,1)
+                removeItem(idx,e){console.log(idx,e)
+                    this.datalist.splice(idx,1);
+                    // e.stopPropagation()
                 },
-                completeItem(idx){
+                completeItem(idx,e){console.log('complete')
                     this.datalist.forEach((item,i)=>{
                         if(i === idx){
                             item.done = true;
                         }
+                    });
+                    // e.stopPropagation()
+                },
+
+                // 选中或取消数据勾选
+                selectItem(idx){
+                    this.datalist.forEach((item,i)=>{
+                        if(i===idx)
+                        item.selected = !item.selected;
                     })
                 }
             }
