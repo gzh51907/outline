@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>07.常用指令</title>
+    <script src="./assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>07.常用指令</h1>
+    <div id="app">
+        <!-- 写在这里的数据都是vm实例的属性 -->
+        <p>
+            <button v-on:click="show=!show">显示隐藏</button>
+        </p>
+        <img src="./assets/img/jingjing.png" v-if="show" />
+        <img src="./assets/img/laoxie.jpg" v-else/>
+    </div>
+    <script>
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                show:true
+            }
+        })
+    </script>
+</body>
+</html>

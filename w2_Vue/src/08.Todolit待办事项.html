@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>08.Todolit待办事项</title>
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.css">
+    <script src="./assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>08.Todolit待办事项</h1>
+    <div id="app" class="container-fluid">
+        <div class="input-group">
+            <input type="text" class="form-control" ref="keyword" v-model="keyword" @keyup.13="addItem">
+            <div class="input-group-addon" style="padding:2px;">
+                <input type="date" v-model="date"/>
+            </div>
+            <span class="input-group-btn">
+                <button class="btn btn-success" type="button" @click="addItem">添加</button>
+            </span>
+        </div>
+        
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>全选</th>
+                    <th>#</th>
+                    <th>待办事项</th>
+                    <th>预计完成事件</th>
+                    <th>是否完成</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item,idx) in datalist">
+                    <td><input type="checkbox" /></td>
+                    <td>{{idx+1}}</td>
+                    <td>{{item.content}}</td>
+                    <td>{{item.date}}</td>
+                    <td>{{item.done ? '是':'否'}}</td>
+                    <td>
+                        <div class="btn-group btn-group-sm">
+                            <button class="btn btn-default" type="submit" @click="completeItem(idx)">完成</button>
+                            <button class="btn btn-danger" type="submit" @click="removeItem(idx)">删除</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        /**
+         * 08.Todolit待办事项
+            * 增
+            * 删
+            * 改
+            * 查
+         */
+
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                keyword:'',
+                date:'',
+                datalist: [{
+                    id: 1,
+                    content: '先定个小目标，赚他5个亿',
+                    done: false,
+                    date: '2019-12-25'
+                }]
+            },
+            methods:{
+                addItem(){
+                    let data = {
+                        id:this.datalist.length+1,
+                        content:this.keyword,
+                        done:false,
+                        date:this.date
+                    }
+                    this.datalist.unshift(data)
+
+                    this.keyword = '';
+
+                    // 通过this.$refs.keyword获取到节点
+                    this.$refs.keyword.focus();
+                },
+                removeItem(idx){
+                    this.datalist.splice(idx,1)
+                },
+                completeItem(idx){
+                    this.datalist.forEach((item,i)=>{
+                        if(i === idx){
+                            item.done = true;
+                        }
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
