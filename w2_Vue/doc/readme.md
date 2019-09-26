@@ -136,3 +136,71 @@
         * $data
 
         * $set()：Vue.set()的别名
+
+## day3-4
+
+### 面试题
+
+### 复习
+* 如何设置响应式属性
+    * data
+    * Vue.set(target,key,value) / vm.$set()
+    * 数组变异方法
+    ```
+        data.score.wuli = 'xxx';
+    ```
+* 修饰符
+    * v-on.xx.修复
+    * v-model
+    ```html
+
+        <select>
+            <option value="">a</option>
+            <option>b</option>
+            <option>c</option>
+        </select>
+
+        new Vue({
+            data:{
+                hobby:[]
+            }
+        })
+
+        <input type="checkbox" value="代码" v-model="hobby">
+        <input type="checkbox" value="篮球" v-model="hobby">
+        <input type="checkbox" value="羽毛球" v-model="hobby">
+    ```
+
+### 知识点
+* Vue是一个高性能高效率的框架
+    * VirtualDOM虚拟DOM
+        > 结构类似与真实DOM节点的js对象
+        ```
+            {
+                type:"div",
+                attrs:{},
+                children:[{
+                    {
+                        type:'ul'
+                        attrs:
+                        children:[{
+                            type:'li'
+                            children:'xx'
+                        }]
+                    }
+                }]
+                key:
+                ....
+            }
+        ```
+    * diff算法
+    ```js
+        btn.innerText = 'laoxie';
+        btn.innerText = 'jingjing';
+        btn.innerText = 'xiaoxie'
+        btn.innerText = 'laoxie'
+    ```
+* 影响页面性能的因素
+    * 节点频繁操作
+    * 事件绑定数量
+    * http请求数量

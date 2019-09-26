@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>12.key的作用</title>
+    <script src="./assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>12.key的作用</h1>
+    <div id="app">
+        <ul>
+            <li v-for="(item,idx) in namelist" :key="item">
+                <input type="checkbox"> {{idx+1}} - {{item}}
+            </li>
+        </ul>
+        <input type="text" v-model="newName" ref="newName">
+        <button @click="add">添加</button>
+    </div>
+    <script>
+        /**
+            Key的作用
+                * 唯一且稳定
+                * 同级且同类型的元素上
+                    * 无key: 复用原则
+                    * 有key：
+        */
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                newName:'',
+                namelist:['laoxie','jingjing','laoyao']
+            },
+            methods:{
+                add(){
+                    this.namelist.unshift(this.newName);
+                    this.newName = '';
+                    this.$refs.newName.focus();
+                }
+            },
+            mounted(){
+                //
+                document.querySelectorAll('li').forEach((li,idx)=>{
+                    li.setAttribute('data-name',this.namelist[idx]);
+                })
+            }
+        })
+    </script>
+</body>
+</html>
