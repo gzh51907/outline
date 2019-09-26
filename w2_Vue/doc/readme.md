@@ -140,6 +140,20 @@
 ## day3-4
 
 ### 面试题
+* 实例化过程经历的步骤
+    1、创建一个对象obj
+    2、把this指向obj
+    3、改变原型（__prop__指向构造函数的原型）
+    4、执行构造函数中的代码
+    5、返回创建的对象
+    ```js
+        function Person(){
+            // var obj = {}
+            // this.__prop__ = Person.prototype
+        }
+
+        new Person()
+    ```
 
 ### 复习
 * 如何设置响应式属性
@@ -184,7 +198,12 @@
                         type:'ul'
                         attrs:
                         children:[{
+                            type:'li',
+                            key:1,
+                            children:'xx'
+                        },{
                             type:'li'
+                            key:2,
                             children:'xx'
                         }]
                     }
@@ -194,6 +213,7 @@
             }
         ```
     * diff算法
+        * key： 给同级别同类型的节点添加key属性
     ```js
         btn.innerText = 'laoxie';
         btn.innerText = 'jingjing';
@@ -204,3 +224,14 @@
     * 节点频繁操作
     * 事件绑定数量
     * http请求数量
+
+* 自定义指令
+    * 全局指令：Vue.directive(name,options)
+    * 局部指令：directives
+
+
+* 组件化开发（模块化开发）
+    * 全局组件
+        * Vue.component()
+    * 局部组件
+        * components

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>13.自定义指令</title>
+    <script src="./assets/js/vue.js"></script>
+    <style>
+        [v-cloak]{display:none}
+    </style>
+</head>
+<body>
+    <h1>13.自定义指令</h1>
+    <div id="app">
+        <div v-cloak>
+            <h4 v-pre>{{msg}}</h4>
+            <p v-once>{{msg}}</p>
+            <p>msg:{{msg}}</p>
+            <div v-laoxie:a.stop.13="username">点我有惊喜</div>
+        </div>
+    </div>
+    <script>
+        /**
+            * 指令完整格式：
+                * 无值:v-else
+                * 有值：v-text="val"
+                * 有参数：v-bind:src="val"
+                * 有修饰符：v-on:click.stop="val"
+            * 常用指令
+
+
+            * 非常用
+                * v-once    只渲染一次
+                * v-pre     不渲染指令所在标签中的内容
+                * v-cloak
+
+            * 自定义指令
+                * 全局指令
+                    * 定义：Vue.directive(name,option)
+                * 局部指令
+        */
+        // 定义一个全局指令
+        // Vue.directive('laoxie',function(){})
+        Vue.directive('laoxie',{
+            // 初始化时执行
+            bind:function(el,binding){
+                console.log('binding:',binding);
+
+                if(binding.modifiers.stop){
+                    event.stopPropagation();
+                }
+
+                 //binding参数如下
+                el.innerHTML =
+                'name: '       + JSON.stringify(binding.name) + '<br>' + //指令名
+                'value: '      + JSON.stringify(binding.value) + '<br>' + //指令值
+                'expression: ' + JSON.stringify(binding.expression) + '<br>' + //字符串形式的指令表达式
+                'arg: '        + JSON.stringify(binding.arg) + '<br>' + //指令参数，
+                'modifiers: '  + JSON.stringify(binding.modifiers) + '<br>' //指令修饰符
+            },
+            // 元素插入到页面后执行
+            inserted(el,bindin){
+                console.log('el.inserted:',el)
+            }
+        })
+
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                username:'jingjing',
+                msg:'hello laoxie'
+            }
+        })
+
+        // 延迟挂载
+        // setTimeout(()=>{
+        //     vm.$mount('#app')
+        // },5000)
+    </script>
+</body>
+</html>
