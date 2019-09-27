@@ -235,3 +235,60 @@
         * Vue.component()
     * 局部组件
         * components
+
+
+## day3-5
+
+### 面试题
+* 同步与异步的区别
+    * Worker
+* 模块化规范
+* 场景题
+* HTML5新特性
+    * 新标签
+        * canvas
+        * video
+        * audio
+    * 新表单类型
+    * svg
+        * 矢量图 与 位图
+    * WebStorage
+    * WebSocket
+    * WebWorker
+    * FormData
+    * 拖放API
+    
+* ES6新特性
+    * 
+
+### 复习
+* 指令
+    * 内置指令
+    * 自定义指令
+        * 全局：Vue.directive(name,option);
+        * 局部：directives
+    * 使用
+        > v-[name]
+* 组件
+    * 内置组件
+    * 自定义组件
+        > 组件就是一个Vue实例
+        * 全局：Vue.component(name,options)
+        * 局部
+    * 使用
+        * 必须小写（W3C）
+
+### 知识点
+* 组件通讯
+    * 遵循原则
+        * 状态提升：把数据放在操作数据组件的共同父级
+        * 谁的数据谁修改
+    * 父to子：props
+        1. 父组件操作：给子组件设置html属性
+        2. 子组件操作：设置props配置参数，用于接收数据
+    * 子to父
+        * 传递方法
+
+    * 数据流向
+        * 单向数据流：父组件数据修改后会自动更新到子组件，反之不成立（子组件不可修改父组件的数据）
+        * 双向数据流：angular1
