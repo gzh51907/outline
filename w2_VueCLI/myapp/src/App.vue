@@ -1,17 +1,24 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <TodoList/>
+    <!-- webpack编译时会自动编译成<todo-list/> -->
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import TodoList from './components/TodoList.vue';
 
 export default {
   name: 'app',
+  data(){
+    return {
+      username:'laoxie'
+    }
+  },
   components: {
-    HelloWorld
+    HelloWorld,
+    TodoList
   }
 }
 </script>

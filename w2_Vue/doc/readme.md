@@ -374,3 +374,37 @@
     * ESModule  ECMAScript2015
         * import
         * export
+
+* Vue组件花开发
+    * 单文件组件(.vue)
+        * 包含html,css,js的一个模块
+
+* 生命周期
+    * 程序从创建到销毁的过程
+    * Vue的生命周期分为4个阶段(每个阶段分成两个生命周期函数(钩子函数))
+        1. 创建阶段create
+            * beforeCreate()
+            > 响应式属性
+            * created()
+        2. 挂载阶段Mount
+            * beforeMount()
+            > 挂载数据到视图
+            * mounted()
+        3. 更新阶段Update
+            * beforeUpdate()
+            * updated()
+        4. 销毁阶段Destroy
+            * beforeDestroy()
+            * destroyed()
+    * 关键点
+        * 了解Vue在每个阶段做了什么
+        * 在每个生命周期函数适合作用哪些操作
+            * 取消ajax请求
+                ```js
+                    let xhr = new XMLHttpRequest()
+                    xhr.open()
+                    xhr.send()
+
+                    // 取消ajax
+                    xhr.abort()
+                ```
