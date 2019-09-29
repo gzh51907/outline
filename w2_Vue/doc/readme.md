@@ -408,3 +408,52 @@
                     // 取消ajax
                     xhr.abort()
                 ```
+
+## day3-7
+
+### 面试题
+* 浏览器如何识别vue的单文件组件
+    * vueCLI
+        * webpack
+* vue单文件组件中的局部样式原理
+    1. 给当前组件的html添加自定义属性 `data-v-[hash]`
+    2. 利用css的属性选择器
+
+### 复习
+* 组件化开发
+    * ESModule  
+        * import
+        * export
+    * 单文件组件
+        * template
+        * script
+        * style
+            * sass,less,stylus
+            * 局部样式
+    * VueCLI
+        * Webpack
+            > webpack增强了import的功能,并支持CommonJS规范
+        * eslint: 带规范工具
+* 生命周期函数
+    1. Creating
+        > 初始化,响应式属性,注入
+    2. Mounting
+        > 把数据挂载到视图
+    3. Updating
+        > VirtualDOM(diff算法)
+    4. Destroying
+        > 断开各种监听
+
+    ```js
+        start = {a:10,b:20}
+        end = {a:10,b:30}
+
+    ```
+
+
+### 知识点
+* 内置组件
+    * component     动态组件
+        * is
+            * String 组件名称
+            * ComponentDefinition   组件配置对象
