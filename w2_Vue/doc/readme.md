@@ -453,7 +453,22 @@
 
 ### 知识点
 * 内置组件
-    * component     动态组件
+    * `<slot>`
+    * `<component>`     动态组件
         * is
             * String 组件名称
             * ComponentDefinition   组件配置对象
+    * `<keep-alive>`
+        * include
+        * exclude
+    * `<transition>`
+    * `<transition-group>`
+        * 设置了css过渡动画或js动画
+        * 利用v-if/v-show/component实现进入和离开状态
+
+* Vue全家桶
+
+* 多页面应用 MPA(Multiple Page Application)
+    * 页面之间通过连接进行跳转,跳转时会刷新整个页面
+* 单页面应用 SPA(Single Page Application)
+    * 整个应用只有一个页面(index.html), 靠路由进行跳转
