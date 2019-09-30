@@ -13,6 +13,9 @@ import Cart from '../pages/Cart.vue';
 import Reg from '../pages/Reg.vue';
 import Login from '../pages/Login.vue';
 import NotFound from '../pages/NotFound.vue';
+import Discover from '../pages/Discover.vue';
+import Mine from '../pages/Mine.vue';
+import Goods from '../pages/Goods.vue';
 
 // 3. 实例化router并配置参数
 let router = new VueRouter({
@@ -34,6 +37,23 @@ let router = new VueRouter({
             name: 'cart',
             path: '/cart',
             component: Cart
+        },
+        {
+            name: 'discover',
+            path: '/discover',
+            component: Discover
+        },
+
+        // 动态路由
+        {
+            name: 'goods',
+            path: '/goods/:id',
+            component: Goods
+        },
+        {
+            name: 'mine',
+            path: '/mine',
+            component: Mine
         },
         {
             path: '/reg',

@@ -135,7 +135,7 @@
         * $el
         * $data
 
-        * $set()：Vue.set()的别名
+        * $set()：Vue.set(target,key,val)的别名
 
 ## day3-4
 
@@ -498,10 +498,38 @@
     * 路由内容显示
         * `<router-view/>`
     * 导航（路由跳转）
-        * 声明式导航
+        * 声明式导航：利用已经声明好的组件实现路由跳转
             * `<router-link/>`
+        * 编程式导航：利用js代码实现导航
+            * $route    当前路由信息
+            * $router   路由实例
+                * push()
+                * replace()
+        ```js
+            <router-link to="/home">   //等效于 this.$route.push('/home')
+            <router-link to="/home" replace>   //等效于 this.$route.replace('/home')
+        ```
+    * 路由传参
+    * 动态路由
+    ```js
+        `/goods/:id`;//'/goods/123','/goods/456'
+    ```
+
+* 请求数据
+    * axios
     
 * VueUI框架
     * elementUI         饿了么
     * iView             腾讯出品
     * ant-design        阿里巴巴
+
+* 个人项目说明
+    * 技术栈： 
+        * 全家桶：Vue + VueCLI + VueRouter + axios
+        * 其他技术：git + github
+        * 模块化与组件化
+            * npm
+            * esmodule
+            * require()
+        * VueUI框架
+    * markdown编写
