@@ -467,8 +467,41 @@
         * 利用v-if/v-show/component实现进入和离开状态
 
 * Vue全家桶
+    * Vue + VueCLI + VueRouter
 
 * 多页面应用 MPA(Multiple Page Application)
     * 页面之间通过连接进行跳转,跳转时会刷新整个页面
 * 单页面应用 SPA(Single Page Application)
     * 整个应用只有一个页面(index.html), 靠路由进行跳转
+
+## day3-8
+
+### 面试题
+* 防抖与节流：优化性能
+    * 节流
+        > 只指定第一次，忽略后面所有操作
+        * 案例：滚动加载更多
+    * 防抖
+        > 只执行最后一次，忽略之前素有操作
+        * 案例：
+            * 百度搜索建议
+            * 动画
+
+### 知识点
+* VueRouter
+    * 使用步骤
+    * 配置参数
+        * mode      路由模式
+            * hash（默认）
+            * history
+        * routes    路由配置参数
+    * 路由内容显示
+        * `<router-view/>`
+    * 导航（路由跳转）
+        * 声明式导航
+            * `<router-link/>`
+    
+* VueUI框架
+    * elementUI         饿了么
+    * iView             腾讯出品
+    * ant-design        阿里巴巴
