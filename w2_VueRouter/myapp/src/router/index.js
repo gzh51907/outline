@@ -73,6 +73,13 @@ let router = new VueRouter({
     ]
 });
 
+// 全局路由守卫
+router.beforeEach(function(to,from,next){
+    window.console.log('beforeEach');
+
+    next();
+})
+
 
 // 5.在组件中使用VueRouter
 

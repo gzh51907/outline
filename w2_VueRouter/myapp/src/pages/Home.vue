@@ -48,8 +48,6 @@ export default {
         act: "index"
       }
     });
-
-    console.log("res", datas);
     
     // 轮播图数据
     this.adlist = datas[0].adv_list.item;

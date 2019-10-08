@@ -11,7 +11,6 @@ export default {
         }
     },
     created(){
-        console.log(this.$route)
         this.username = this.$route.query.username
     }
 }

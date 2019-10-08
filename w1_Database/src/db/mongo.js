@@ -44,7 +44,6 @@ async function create(colName,data){
     client.close();
     return result
 }
-create('user',[{username:'xiaoxie',age:17,password:'12'}])
 
 /**
  * 删

@@ -533,3 +533,91 @@
             * require()
         * VueUI框架
     * markdown编写
+
+## day4-2
+
+### 复习
+* 路由VueRouter
+    * 使用步骤
+        1. 引入     
+            import
+        2. 安装（使用）
+            Vue.use()
+        3. 实例化路由并配置参数
+            new VueRouter(options)
+        4. 注入Vue跟实例
+        5. 在组件中使用路由
+            * this.$router  得到路由实例（第3步实例化的对象）
+            * this.$route   得到当前路由信息
+    * 内容显示
+        * <router-view/>    根据浏览器路径显示不同的组件内容
+    * 导航：用户通过点击实现页面切换
+        * 声明式导航
+            * <router-link/>
+                * to
+                * tag
+                * event
+                * replace
+        * 编程式导航
+            * this.$router
+                * push()
+                * replace()
+            * this.$route
+    * 路由传参
+        * 跳转时传参
+            * params
+                * {name:'home',params}
+                * 刷新数据消失
+                    * 动态路由
+                    * 本地存储
+                        * webstorage
+                        * cookie
+            * query
+                * {name:'home',query}
+                * {path:'/home',query}
+    * 动态路由
+        > 动态路由不会有组件的销毁与重建过程，所以不会执行生命周期函数
+        * 监听动态路由的改变
+            * watch
+                ```js
+                    new Vue({
+                        ...
+                        data(){
+                            return {
+                                a:100,
+                                score:{
+                                    english:100
+                                }
+                            }
+                        }
+                        watch:{
+                            $route:function(newValue,oldValue){
+
+                            },
+                            a(){
+
+                            },
+                            'score.english':function(newValue,oldValue){
+
+                            }
+                        }
+                    })
+                ```
+            * beforeRouteUpdate守卫
+                ```js
+                    //...
+                    beforeRouteUpdate(to,from,next){
+                        //if(有证书){
+                            next()
+                        //}
+                    }
+
+                ```
+    * 路由守卫
+        * 全局守卫
+            > 写在路由实例中
+        * 组件内的守卫
+            > 写在组件内
+            * beforeRouteUpdate
+        * 路由独享的守卫
+            > 写在路由配置中

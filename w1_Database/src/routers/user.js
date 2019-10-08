@@ -17,8 +17,13 @@ const colName = 'user'
 // /user/reg
 Router.post('/reg',async (req,res)=>{
     let {username,password} = req.body;
-
-    let result = await mongo.create(colName,[{username,password,regtime:Date.now()}]);
+    let result
+    try{
+        await mongo.create(colName,[{username,password,regtime:new Date()}]);
+        result = formatData()
+    }catch(err){
+        result = formatData({code:0})
+    }
 
     res.send(result);
 })
