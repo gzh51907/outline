@@ -53,11 +53,7 @@ let router = new VueRouter({
         {
             name: 'discover',
             path: '/discover',
-            component: Discover,
-            beforeEnter(to,from,next){
-                console.log('Discover.beforeEnter')
-                next();
-            }
+            component: Discover
         },
 
         // 动态路由
@@ -94,7 +90,6 @@ let router = new VueRouter({
 
 // 全局路由守卫
 router.beforeEach(function(to,from,next){
-    window.console.log('beforeEach',to);
 
     // 在全局路由守卫beforeEach中进行页面权限访问控制
     // 先判断目标路由是否需要鉴权
@@ -115,10 +110,6 @@ router.beforeEach(function(to,from,next){
         next();
     }
 
-})
-
-router.afterEach(function(to,from){
-    window.console.log('afterEach');
 })
 
 

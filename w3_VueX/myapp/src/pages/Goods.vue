@@ -11,8 +11,8 @@
         </p>
 
         <el-button-group>
-            <el-button type="warning" icon="el-icon-shopping-cart-full">加入购物车</el-button>
-            <el-button type="danger" icon="el-icon-goods">立即购买</el-button>
+            <el-button type="warning" icon="el-icon-shopping-cart-full" @click="add2cart">加入购物车</el-button>
+            <el-button type="danger" icon="el-icon-goods" @click="buynow">立即购买</el-button>
         </el-button-group>
         <h4>推荐商品</h4>
         <el-row :gutter="20">
@@ -44,6 +44,7 @@ export default {
             }
         }
     },
+
     watch:{
         // 监听实例下的属性
         // 当实例下的$route属性有修改时，执行函数中的代码
@@ -106,6 +107,34 @@ export default {
             }
 
             console.log(this.goodsInfo)
+        },
+        add2cart(){
+            let id = this.goodsInfo.goods_id
+            
+
+            // 判断当前商品是否已经存在购物车
+            let currentGoods = this.$store.state.cartlist.filter(item=>item.id===id)[0]
+            if(currentGoods){
+                // 存在：修改商品数量
+                let qty = currentGoods.qty+1;
+                this.$store.commit('changeQty',{id,qty});
+            }else{
+                // 添加一个商品
+                let goods = {
+                    id,
+                    name: this.goodsInfo.goods_name,
+                    imgurl:this.goodsInfo.goods_image,
+                    price: this.goodsInfo.goods_promotion_price,
+                    qty: 1
+                }
+                this.$store.commit('add2cart',goods)
+            }
+
+        },
+        buynow(){
+            // 立即购买
+            this.add2cart();
+            this.$router.push('/cart');
         }
     }
 }

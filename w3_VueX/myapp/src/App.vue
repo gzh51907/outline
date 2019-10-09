@@ -7,7 +7,7 @@
             <el-menu-item :index="item.path" v-for="item in menus" :key="item.name">
               <!-- <router-link :to="item.path"> -->
               <!-- <router-link :to="{name:item.name}"> -->
-                <el-badge :value="12" class="item" v-if="item.name==='cart'" style="line-height:30px">
+                <el-badge :value="cartlength" class="item" v-if="item.name==='cart'" style="line-height:30px">
                   {{item.text}}
                 </el-badge>
                 <template v-else>
@@ -62,6 +62,12 @@ export default {
       ]
     };
   },
+  computed:{
+    cartlength(){
+      // return this.$store.state.cartlist.length;
+      return this.$store.getters.cartlength
+    }
+  },
   methods: {
     handleSelect(index, indexpath) {
       console.log(index, indexpath);
@@ -73,7 +79,7 @@ export default {
   },
   created() {
     //获取url地址参数
-    console.log(this.$router);
+    
     this.activeIndex = this.$route.path;
   },
   components: {}

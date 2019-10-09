@@ -58,11 +58,6 @@ export default {
     this.recommend = datas.slice(1).map(item=>{
         return item.goods
     });//[{title,item},{},{},{}]
-  },
-
-  beforeRouteLeave(to,from,next){
-    console.log('Home.beforeRouteLeave');
-    next();
   }
 };
 </script>
