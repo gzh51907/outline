@@ -19,8 +19,11 @@
         </el-col>
         <el-col :span="6" class="txt-right">
           <!-- <el-button-group> -->
+            <template v-if="!currentUser">
             <el-button type="text" @click="goto('/reg')">注册</el-button>
             <el-button type="text" @click="goto('/login')">登录</el-button>
+            </template>
+            <el-button type="text" @click="logout" v-else>退出</el-button>
           <!-- </el-button-group> -->
         </el-col>
       </el-row>
@@ -66,6 +69,9 @@ export default {
     cartlength(){
       // return this.$store.state.cartlist.length;
       return this.$store.getters.cartlength
+    },
+    currentUser(){
+      return this.$store.state.common.user
     }
   },
   methods: {
@@ -75,12 +81,17 @@ export default {
     },
     goto(path){
       this.$router.push(path)
+    },
+    logout(){
+      this.$store.commit('logout');
     }
   },
   created() {
     //获取url地址参数
     
     this.activeIndex = this.$route.path;
+
+    this.$store.dispatch('checkLogin');
   },
   components: {}
 };

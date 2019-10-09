@@ -11,6 +11,8 @@ const Router = express.Router();
 
 const {mysql:query} = require('../db');
 
+const {formatData} = require('../utils')
+
 //使用连接对象来连接数据库
 // 创建连接对象，并配置参数
 // var connection = mysql.createConnection({
@@ -21,7 +23,18 @@ const {mysql:query} = require('../db');
 // });
 // connection.connect();
 
+// 库存
+Router.get('/kucun',(req,res)=>{
+    let {id} = req.query;console.log(id)
 
+    // 查询id对应商品的库存量，并返回前端
+    let result = formatData({data:5})
+
+    setTimeout(()=>{
+        res.send(result);
+    },600)
+
+})
 
 Router.route('/')
     .post((req,res)=>{
@@ -30,7 +43,7 @@ Router.route('/')
     // 查询所有
     // /goods?page=1&size=10&sort=price,1
     .get(async (req,res)=>{
-        let {size=10,page=1,price} = req.query;
+        let {size=10,page=1,price,sort} = req.query;
         let sql = `select * from goods limit ${(page-1)*size},${size}`;
 
         if(sort){
@@ -51,7 +64,7 @@ Router.route('/')
         // 用同步的代码实现异步操作
         let result = await query(sql);
         res.send(result);
-    })
+    });
 
 Router.route('/:id')
     .delete(async (req,res)=>{
@@ -95,8 +108,7 @@ Router.route('/:id')
 
         let result = await query(`select * from goods where id=${id}`)
         res.send(result);
-    })
-
+    });
 
 
 

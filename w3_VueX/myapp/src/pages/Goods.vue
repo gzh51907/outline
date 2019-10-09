@@ -113,7 +113,7 @@ export default {
             
 
             // 判断当前商品是否已经存在购物车
-            let currentGoods = this.$store.state.cartlist.filter(item=>item.id===id)[0]
+            let currentGoods = this.$store.state.cart.cartlist.filter(item=>item.id===id)[0]
             if(currentGoods){
                 // 存在：修改商品数量
                 let qty = currentGoods.qty+1;

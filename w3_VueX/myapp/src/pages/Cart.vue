@@ -13,7 +13,7 @@
         <h4>{{item.name}}</h4>
         <p class="price">
           <span>{{item.price}}</span> &times;
-          <el-input-number size="mini" :value="item.qty" @change="changeQty(item.id,$event)"></el-input-number>
+          <el-input-number size="mini" v-model="item.qty" @change="changeQty(item.id,$event)"></el-input-number>
         </p>
       </el-col>
       <el-col :span="4" style="text-align:right">
@@ -43,7 +43,7 @@ export default {
   },
   computed: {
     cartlist(){
-      return this.$store.state.cartlist
+      return this.$store.state.cart.cartlist
     },
     totalPrice() {
       // let total = 0;
@@ -62,7 +62,8 @@ export default {
   },
   methods: {
     changeQty(id, qty) {
-      this.$store.commit('changeQty',{id,qty})
+      // this.$store.commit('changeQty',{id,qty})
+      this.$store.dispatch('changeQtyAsync',{id,qty})
     },
     remove(id){
       this.$store.commit('removeFromCart',id)

@@ -16,6 +16,7 @@ import NotFound from '../pages/NotFound.vue';
 import Discover from '../pages/Discover.vue';
 import Mine from '../pages/Mine.vue';
 import Goods from '../pages/Goods.vue';
+import store from '../store';
 
 // 3. 实例化router并配置参数
 let router = new VueRouter({
@@ -89,14 +90,25 @@ let router = new VueRouter({
 });
 
 // 全局路由守卫
-router.beforeEach(function(to,from,next){
+router.beforeEach(async function(to,from,next){
 
     // 在全局路由守卫beforeEach中进行页面权限访问控制
     // 先判断目标路由是否需要鉴权
     if(to.meta.requiresAuth){
-        let Authorization  = localStorage.getItem('Authorization');
-        if(Authorization){
-            next();
+        let user  = localStorage.getItem('user');
+        if(user){
+            let res = await store.dispatch('checkLogin');
+            console.log('res:',res)
+            if(res === 400){
+                next({
+                    path:'/login',
+                    query:{
+                        targetUrl:to.fullPath
+                    }
+                });
+            }else{
+                next();
+            }
         }else{
             router.push({
                 path:'/login',
