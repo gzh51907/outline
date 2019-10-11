@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>21.插件</title>
+    <script src="./assets/js/vue.js"></script>
+</head>
+<body>
+	<h1>21.插件</h1>
+    <div id="app">
+        <el-button>测试</el-button>
+    </div>
+	<script>
+        // 21.插件
+
+        // 定义一个插件（对象）
+        let myPlugin = {
+            install:function(Vue){
+                console.log('myPlugin.install:',Vue)
+
+                let componentName = 'button,form,input,container,menu,row,col'.split(',')
+                componentName.forEach((name)=>{
+                    Vue.component('el-'+name,{
+                        //..
+                        template:'<button><slot/></button>'
+                    })
+                })
+
+                // 过滤器
+                // 指令
+                // 全局方法
+                Vue.message = function(){}
+
+                // 原型方法
+                Vue.prototype.show = function(){
+                    
+                }
+            }
+        }
+
+        // 定义一个插件（函数）
+        let yourPlugin = function(Vue){
+
+        }
+
+        Vue.use(myPlugin);
+
+        
+        new Vue({
+            el:'#app',
+            data:{
+                username:'laoxie'
+            },
+            mounted(){
+                // this.show()
+            }
+        })
+	</script>
+</body>
+</html>

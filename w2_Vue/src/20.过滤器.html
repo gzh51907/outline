@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>20.过滤器</title>
+    <script src="./assets/js/vue.js"></script>
+</head>
+<body>
+	<h1>20.过滤器</h1>
+    <div id="app">
+        <p>{{username}}</p>
+        <p>{{username.toUpperCase()}}</p>
+        <p>{{upperUsername}}</p>
+        <p>{{username | upper}}</p>
+        <p>{{username | capitalize}}</p>
+    </div>
+	<script>
+        // 过滤器
+        // 过滤器可以用在两个地方：双花括号插值和 v-bind
+        Vue.filter('upper',function(val){
+            return val.toUpperCase();
+        })
+        new Vue({
+            el:'#app',
+            data:{
+                username:'laoxie'
+            },
+            computed:{
+                upperUsername(){
+                    return this.username.toUpperCase()
+                }
+            },
+            methods:{
+
+            },
+
+            // 局部过滤器
+            filters:{
+                // 首字母大写
+                capitalize(val){
+                    return val[0].toUpperCase() + val.slice(1)
+                },
+
+                // 案例1：lao-xie-header -> laoXieHeader
+                // 案例2：1000000   -> 1,000,000
+                // 案例3：时间戳  -> formatDate('YYYY/MM/DD')  ->  2019-10-11
+            }
+
+        })
+	</script>
+</body>
+</html>

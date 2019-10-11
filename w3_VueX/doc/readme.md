@@ -43,4 +43,18 @@
 * Vue扩展
     * 单页面应用中路由切换的原理
         * 路由类型：hash（默认）/history
-            * hash路由的原理
+            * hash路由的原理：window.onhashchange
+
+* Vue的扩展
+    * 自定义组件
+        * 全局：Vue.component()
+        * 局部：components
+    * 自定义指令
+        * 全局：Vue.directive()
+        * 局部：directives
+    * 过滤器
+        * 全局：Vue.filter(name,definition)
+        * 局部：filters
+    * 插件
+        * Vue.use(ElementUI)
+* 按需加载
