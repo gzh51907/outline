@@ -19,3 +19,28 @@
 * 专业术语
     * 后端：backEnd  BE
     * 前端：frontEnd FE
+
+## day 4-5
+
+### 复习
+* store模块化
+    > 模块化后会影响state的获取（store.state.xxx -> store.state.cart.xxx）
+    ```js
+        new Vuex.Store({
+            modules:{
+                cart
+            }
+        })
+    ```
+
+### 知识点
+* 映射（简化代码写法）
+    * mapState      把state中的数据映射到computed中
+    * mapGetters    把getters中的数据映射到computed中
+    * mapMutations  把mutations中的方法映射到methods中
+    * mapActions    把actions中的方法映射到methods中
+
+* Vue扩展
+    * 单页面应用中路由切换的原理
+        * 路由类型：hash（默认）/history
+            * hash路由的原理

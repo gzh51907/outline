@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
  * @param {Number} expiresIn    有效期（单位:s）
  */
 let {secret} = require('../config.json');
-function create(data,expiresIn=20){
+function create(data,expiresIn=60*60*24*7){
     let token = jwt.sign({data}, secret, {
         expiresIn
     });

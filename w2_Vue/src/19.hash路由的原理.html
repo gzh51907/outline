@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+	<title>19.hash路由的原理</title>
+</head>
+<body>
+	<h1>19.hash路由的原理</h1>
+    <div id="app">
+        初始化
+    </div>
+	<script>
+        let router = [
+            {
+                path:'/home',
+                component:'<div>首页</div>'
+            },
+            {
+                path:'/cart',
+                component:'<div>购物车</div>'
+            },
+            {
+                path:'/mine',
+                component:'<div>我的</div>'
+            },
+            {
+                path:'/login',
+                component:'<div>登录</div>'
+            }
+        ]
+        let app = document.querySelector('#app');
+        // hashchange：在浏览器窗口url地址中的hash值改变时触发
+		window.onhashchange = function(){
+            // 获取hash值
+            let hash = location.hash.slice(1);console.log(hash)
+            let currentPage = router.filter(item=>item.path===hash)[0]
+            if(currentPage){
+                app.innerHTML = currentPage.component;
+            }else{
+                // 404
+                app.innerHTML = `<h1>404</h1>`;
+            }
+        }
+	</script>
+</body>
+</html>

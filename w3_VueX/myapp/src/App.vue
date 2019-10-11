@@ -36,6 +36,13 @@
 </template>
 
 <script>
+import {mapState,mapGetters,mapMutations} from 'vuex';
+
+// console.log('mapState:',mapState({
+//   user(state){
+//     return state.common.user;
+//   }
+// }))
 export default {
   name: "app",
   data() {
@@ -66,13 +73,19 @@ export default {
     };
   },
   computed:{
-    cartlength(){
-      // return this.$store.state.cartlist.length;
-      return this.$store.getters.cartlength
-    },
-    currentUser(){
-      return this.$store.state.common.user
-    }
+    // cartlength(){
+    //   // return this.$store.state.cartlist.length;
+    //   return this.$store.getters.cartlength
+    // },
+    ...mapGetters(['cartlength']),
+    // currentUser(){
+    //   return this.$store.state.common.user
+    // }
+    ...mapState({
+      currentUser(state){
+        return state.common.user
+      }
+    })
   },
   methods: {
     handleSelect(index, indexpath) {
@@ -82,9 +95,16 @@ export default {
     goto(path){
       this.$router.push(path)
     },
-    logout(){
-      this.$store.commit('logout');
-    }
+    // logout(){
+    //   this.$store.commit('logout');
+    // }
+    ...mapMutations(['logout'])
+    // ...mapMutations({
+    //   signout:'logout',
+        // userlogout(commit,payload){
+        //    commit('logout',payload)
+        // }
+    // })
   },
   created() {
     //获取url地址参数
@@ -92,6 +112,8 @@ export default {
     this.activeIndex = this.$route.path;
 
     this.$store.dispatch('checkLogin');
+
+
   },
   components: {}
 };

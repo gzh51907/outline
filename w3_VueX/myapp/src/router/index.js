@@ -20,7 +20,7 @@ import store from '../store';
 
 // 3. 实例化router并配置参数
 let router = new VueRouter({
-    // mode:'hash',
+    // mode:'history',
     // 配置参数：不同的 URL 显示不同的内容
     routes: [
         // 首页
