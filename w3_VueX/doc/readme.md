@@ -56,5 +56,10 @@
         * 全局：Vue.filter(name,definition)
         * 局部：filters
     * 插件
-        * Vue.use(ElementUI)
+        * 使用：Vue.use(ElementUI)
+    * 混入mixin
+        * 使用场景：公共配置
+
+## day4-6
 * 按需加载
+    >需要什么就引入什么

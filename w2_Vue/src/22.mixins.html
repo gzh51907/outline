@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>22.mixins</title>
+    <script src="./assets/js/vue.js"></script>
+</head>
+<body>
+	<h1>22.mixins</h1>
+    <div id="app">
+        <jingjing></jingjing>
+        <laoxie></laoxie>
+    </div>
+	<script>
+        /** 
+         * 22.mixins 混入
+            > 用于公共配置
+            * 全局  Vue.mixin(options)
+                * 影响范围较大
+            * 局部
+         */ 
+
+        //  局部mixin
+        let myMixin = {
+            data(){
+                return {
+                    global:false
+                }
+            },
+            methods:{
+                getUsername(){
+                    return this.username;
+                }
+            }
+        }
+
+        //  全局mixin
+         Vue.mixin({
+             // 这里的配置与组件实例一致
+             data(){
+                return {
+                    global:true,
+                    Authorization:'xxxxx'
+                }
+             },
+            //  mixins:[myMixin],
+            mounted(){
+                let user = localStorage.getItem('currentUser');
+                if(user){
+                    user = JSON.parse(user);
+                }
+                console.log(this.username,user)
+
+                
+            }
+         })
+
+        
+
+        Vue.component('jingjing',{
+            data(){
+                return {
+                    username:'jingjing'
+                }
+            },
+            template:'<button>{{username}}</button>',
+            mounted(){
+                console.log('hello my name is ',this.username)
+                console.log('jingjing.token ',this.Authorization)
+                console.log('getUsername:',this.getUsername())
+            }
+        })
+
+        new Vue({
+            el:'#app',
+            data:{
+                username:'Vue'
+            },
+            // mounted(){
+            //     let user = localStorage.getItem('currentUser');
+            //     if(user){
+            //         user = JSON.parse(user);
+            //     }
+            //     console.log(this.username,user)
+            // },
+            components:{
+                laoxie:{
+                    mixins:[myMixin],
+                    data(){
+                        return {
+                            username:'laoxie'
+                        }
+                    },
+                    template:'<button>{{username}}</button>',
+                created(){
+                    console.log('getUsername:',this.getUsername())
+                }
+                }
+            }
+        })
+	</script>
+</body>
+</html>
