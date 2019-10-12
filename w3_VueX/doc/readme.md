@@ -63,3 +63,40 @@
 ## day4-6
 * 按需加载
     >需要什么就引入什么
+
+
+* 面试题：如何让组件上的v-model生效
+```js
+    Vue.component('myform',{
+        props:['value'],
+        template:`<div><input v-bind:value="value" v-on:input="changeKeyword"/><button>搜索<button></div>`,
+        methods:{
+            changeKeyword(e){
+                this.$emit('input',e.currentTarget.value)
+            }
+        }
+    });
+
+    new Vue({
+        el:'#pp',
+        data:{
+            keyword:''
+        }
+    })
+```
+```html
+    <div id="app">
+        <!-- 问题：如何让组件上的v-model生效 -->
+        <myform v-model="keyword"></myform>
+
+        <!-- 等效于 -->
+        <!-- <myform v-bind:value="keyword" v-on:input="keyword=$event.target.value"></myform> -->
+    </div>
+```
+
+* 项目分工
+    * 准备工作
+        * 创建项目
+        * 安装依赖
+        * 远程仓库关联
+        * 公共代码
