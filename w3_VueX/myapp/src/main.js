@@ -105,7 +105,11 @@ Vue.use(Footer);
 Vue.use(Image);
 
 import axios from 'axios';
+const laoxie = axios.create({
+  baseURL: 'http://localhost:3000'
+});
 Vue.prototype.$axios = axios;
+Vue.prototype.$laoxie = laoxie;
 
 
 new Vue({
