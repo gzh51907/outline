@@ -455,18 +455,18 @@ Babel解析规则：
     * React.createRef()
     * 回调 Refs 
         > `ref={el=>this.myRef=el}`
-```js
-    // React.createRef()
-    this.btnSave = React.createRef();
-    <button ref={this.btnSave}>保存</button>
-    //获取节点
-    this.btnSave.current
-
-    //回调 Refs
-    <button ref={el => {this.btnSave = el}}>保存</button>
-    // 获取节点
-    this.btnSave
-```
+        
+    ```js
+        // React.createRef()
+        this.btnSave = React.createRef();
+        <button ref={this.btnSave}>保存</button>
+        //获取节点
+        this.btnSave.current
+        //回调 Refs
+        <button ref={el => {this.btnSave = el}}>保存</button>
+        // 获取节点
+        this.btnSave
+    ```
 
 
 ## 列表&key

@@ -134,3 +134,39 @@
                 * 类组件：
                     * this.props
         * 子->父
+            > 把事件处理函数通过props传入子组件，然后在子组件中执行并传参
+        * 多层次组件通讯：Context
+            1. 父组件创建Context: 
+                1. `let MyContext = React.createContext(defaultValue)`
+                2. <MyContext.Provider value="xxx"></MyContext.Provider>
+            2. 子组件接收
+                * conextType: 只适用于类组件
+                    1. SubComponent.contextType=MyContext
+                    2. this.context.xxx
+                * Consumer
+                    ```js
+                        <MyContext.Consumer>
+                        {
+                            (value)=>{}
+                        }
+                        </MyContext.Consumer>
+                    ```
+
+
+* 事件处理
+    * this指向
+        * this指向组件实例
+            * constructor
+            * render
+            * 生命周函数
+        * 改变this指向
+            * fn.bind(): bind方法改变this指向，只会在第一次生效
+    * event对象
+* ref
+    * React.createRef()
+        1. 创建ref: `this.inputDOM = React.createRef()`
+        2. 写入节点：`ref={this.inputDOM}`
+        3. 获取：`this.inputDOM.current`
+    * 回调函数方式
+        1. 设置：`ref={el=>this.inputDOM=el}`
+        2. 获取：`this.inputDOM`
