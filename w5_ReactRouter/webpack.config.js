@@ -1,0 +1,51 @@
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+module.exports = {
+    entry:'./src/main.js',
+    output:{
+        path:path.join( __dirname,'./dist'),
+        filename:'js/bundle-[name]-[hash:5].js',
+    },
+    devServer:{
+        contentBase:path.join( __dirname,'./src'),
+        open:true
+    },
+
+    // 加载器
+    module:{
+        rules:[
+            // js,jsx
+            {
+                test:/\.jsx?$/,
+                use:{
+                    loader:'babel-loader',
+                    options:{
+                        presets:['@babel/preset-react']
+                    }
+                },
+                include:path.resolve(__dirname,'./src')
+            },
+
+            // css,sass
+            {
+                test:/\.css$/,
+                use:['style-loader','css-loader']
+            },
+            {
+                test:/\.scss$/,
+                use:['style-loader','css-loader','sass-loader']
+            }
+        ]
+    },
+    plugins:[
+         // 删除dist文件夹
+         new CleanWebpackPlugin(),
+
+         // 创建dist文件
+         new HtmlWebpackPlugin({
+             template:'./src/template.html',
+             // filename:'index.html'
+         })
+    ]
+}
