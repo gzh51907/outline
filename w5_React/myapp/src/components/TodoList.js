@@ -51,7 +51,7 @@ class TodoList extends React.Component{
         this.setState({datalist})
     }
     // 完成
-    completeItem(id){console.log(id)
+    completeItem(id,event){
         let {datalist} = this.state;
         datalist = datalist.map(item=>{
             if(item.id === id){

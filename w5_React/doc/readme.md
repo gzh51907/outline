@@ -82,6 +82,8 @@
         let container = <div>{username + '<span></span>'}</div>;
     ```
 * create-react-app
+
+### 知识点
 * 组件
     * 分类
         * 函数组件（无状态组件，受控组件，UI组件）
@@ -136,23 +138,30 @@
         * 子->父
             > 把事件处理函数通过props传入子组件，然后在子组件中执行并传参
         * 多层次组件通讯：Context
-            1. 父组件创建Context: 
-                1. `let MyContext = React.createContext(defaultValue)`
-                2. <MyContext.Provider value="xxx"></MyContext.Provider>
-            2. 子组件接收
+            1. 创建Context
+                 ```js
+                    let MyContext = React.createContext(defaultValue)
+                ```
+            2. 父组件共享数据: 
+                ```js
+                    <MyContext.Provider value="xxx"></MyContext.Provider>
+                ```
+            3. 子组件接收
                 * conextType: 只适用于类组件
-                    1. SubComponent.contextType=MyContext
-                    2. this.context.xxx
+                    ```js
+                        SubComponent.contextType=MyContext
+                        // 获取
+                        this.context.xxx
+                    ```
                 * Consumer
                     ```js
                         <MyContext.Consumer>
-                        {
-                            (value)=>{}
-                        }
+                            {
+                                (value)=>{}
+                            }
                         </MyContext.Consumer>
                     ```
-
-
+        * 内容: props.children
 * 事件处理
     * this指向
         * this指向组件实例
@@ -162,6 +171,7 @@
         * 改变this指向
             * fn.bind(): bind方法改变this指向，只会在第一次生效
     * event对象
+        * 默认事件处理函数的最后一个参数
 * ref
     * React.createRef()
         1. 创建ref: `this.inputDOM = React.createRef()`
@@ -170,3 +180,17 @@
     * 回调函数方式
         1. 设置：`ref={el=>this.inputDOM=el}`
         2. 获取：`this.inputDOM`
+
+
+## day6-2
+
+### 面试题
+* webpack与gulp的区别
+    * webpack是基于配置的构建工具，gulp是基于任务的构建工具
+    * gulpfile.js & webpack.config.js
+
+
+### 知识点
+* webpack配置
+    > webpack.config.js是一个基于commonJS模块
+    * entry: 入口文件
