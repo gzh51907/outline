@@ -194,3 +194,80 @@
 * webpack配置
     > webpack.config.js是一个基于commonJS模块
     * entry: 入口文件
+
+## day6-3
+
+### 复习
+* webpack的配置参数（webpack.config.js）
+    * entry: 入口
+    * output:  出口
+        * path：编译时文件存放路径
+        * filename：
+            * name
+            * hash:5
+        * publicPath
+    * devServer:
+        * contentBase: 服务器根目录
+        * host：主机（默认：localhost） -> 0.0.0.0
+        * post: 端口（默认：8080）
+        * proxy
+        ....
+    * loader加载器
+        > module.rules
+        * test：正则匹配文件后缀
+        * use：使用loader
+    * plugin插件
+        * html-webpack-plugin
+        * clean-webpack-plugin
+* ReactRouter
+    * 理念：万物皆组件
+    * 常用组件
+        * 路由模式：HashRouter / BrowserRouter
+        * 配置
+            * 路由配置：Route
+                * path
+                * component
+                * render
+                * exact
+            * 重定向：Redirect
+                * from
+                * to
+            * 单一匹配：Switch
+        * 导航
+            * 声明式导航
+                * Link
+                    * to
+                    * replace
+                * NavLink
+                    * activeClassName
+                    * activeStyle
+                    * replace
+            * 编程式导航
+                * 如何获取history对象
+                    * 利用<Route/>渲染的组件: this.props.history
+                    * 利用`高阶组件HOC`withRouter获取：
+                * history
+                    * push()        <NavLink to="xx"/>
+                    * replace()     <NavLink to="xx" replace/>
+                * location
+                * match
+* 高阶组件HOC（High Order Component）
+    >高阶组件是一个包装函数，它的返回值才是一个组件
+    * 原理：props
+    * 纯函数：
+        * 内部不会改变传入的参数，相同的参数得到同样的结果
+        * 内部没有自己的状态
+    *
+    ```js
+        function pf(num){
+            return num**2
+        }
+        pf(2);//4
+        pf(2);//4
+
+        function randomNum(min,max){
+
+        }
+    ```
+
+* 生命周函数

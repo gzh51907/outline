@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+import {withTheme} from '../hoc';
 
 class Login extends Component{
     render(){
@@ -9,5 +10,7 @@ class Login extends Component{
         )
     }
 }
+
+Login = withTheme(Login)
 
 export default Login;

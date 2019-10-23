@@ -9,7 +9,7 @@ module.exports = {
     },
     devServer:{
         contentBase:path.join( __dirname,'./src'),
-        open:true
+        // open:true
     },
 
     // 加载器
@@ -21,7 +21,10 @@ module.exports = {
                 use:{
                     loader:'babel-loader',
                     options:{
-                        presets:['@babel/preset-react']
+                        presets:['@babel/preset-react'],
+                        plugins:[
+                            ['@babel/plugin-proposal-decorators',{legacy: true}]
+                        ]
                     }
                 },
                 include:path.resolve(__dirname,'./src')

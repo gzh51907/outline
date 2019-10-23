@@ -1,5 +1,7 @@
 import React,{Component} from 'react';
 
+import {withUser} from '../hoc'
+
 class Discover extends Component{
     render(){
         return (
@@ -9,5 +11,7 @@ class Discover extends Component{
         )
     }
 }
+
+Discover = withUser(Discover)
 
 export default Discover;
