@@ -20,12 +20,18 @@ module.exports = {
                 test:/\.jsx?$/,
                 use:{
                     loader:'babel-loader',
-                    options:{
-                        presets:['@babel/preset-react'],
-                        plugins:[
-                            ['@babel/plugin-proposal-decorators',{legacy: true}]
-                        ]
-                    }
+                    // options:{
+                    //     presets:['@babel/preset-react'],
+                    //     plugins:[
+                    //         ['@babel/plugin-proposal-decorators',{legacy: true}],
+                    //         ['@babel/plugin-proposal-class-properties',{ loose: true }],
+                    //         ["import", {
+                    //             "libraryName": "antd",
+                    //             "libraryDirectory": "es",
+                    //             "style": "css" // `style: true` 会加载 less 文件
+                    //           }]
+                    //     ]
+                    // }
                 },
                 include:path.resolve(__dirname,'./src')
             },

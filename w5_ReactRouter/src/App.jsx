@@ -10,7 +10,7 @@ import { HashRouter,
     withRouter
  } from 'react-router-dom';
 import { Menu, Icon } from 'antd';
-import 'antd/dist/antd.css';
+// import 'antd/dist/antd.css';
 
 
 import Home from './pages/Home.jsx';
@@ -81,12 +81,33 @@ class App extends Component{
                 icon: 'login'
             }]
     }
+
+    // // 原型方法
+    // getMenu(){
+
+    // }
+
+    // // 实例方法
+    // handleClick = ()=>{
+    //     console.log(this)
+    //     console.dir(App)
+    // }
+
+    // // 静态方法（ES6支持）
+    // static show(){
+
+    // }
+    // // 静态属性（ES6默认不支持）
+    // static username = 'App';
+    // // static contextType = MyContext
+
     componentDidMount(){
         let {location:{pathname}} = this.props;console.log(pathname)
         this.setState({
             selected:[pathname]
         })
     }
+   
     render() {
         let {history} = this.props
         let {selected,menu} = this.state;
@@ -125,9 +146,9 @@ class App extends Component{
                     <Route path="/discover" component={Discover} />
                     <Route path="/reg" component={Reg} />
                     <Route path="/login" component={Login} />
-                    <Route path="/" component={Home} exact />
+                    {/* <Route path="/" component={Home} exact /> */}
+                    <Redirect from="/" to="/home" exact/>
                     <Route render={() => <div><h1>404</h1>页面不存在</div>} />
-                    {/* <Redirect from="/" to="/home"/> */}
     
                 </Switch>
             </div>

@@ -271,3 +271,7 @@
     ```
 
 * 生命周函数
+    * Initial       初始化阶段
+    * Mounting      挂载阶段
+    * Updating      更新阶段
+    * Unmounting    卸载阶段
