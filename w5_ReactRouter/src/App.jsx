@@ -13,10 +13,10 @@ import { Menu, Icon } from 'antd';
 // import 'antd/dist/antd.css';
 
 
-import Home from './pages/Home.jsx';
-import Discover from './pages/Discover.jsx';
-import Reg from './pages/Reg.jsx';
-import Login from './pages/Login.jsx';
+import Home from '~/Home';
+import Discover from '~/Discover';
+import Reg from '~/Reg';
+import Login from '~/Login';
 
 const NotFound = function () {
     return (
@@ -132,13 +132,7 @@ class App extends Component{
                     }
                     
                 </Menu>
-                <ul>
-                    {
-                        menu.map(item => <li>
-                            <NavLink to={item.path} activeStyle={{color:'#58bc58',fontWeight:800}}>{item.text}</NavLink>
-                        </li>)
-                    }
-                </ul>
+               
     
     
                 <Switch>

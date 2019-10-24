@@ -12,6 +12,17 @@ module.exports = {
         // open:true
     },
 
+    resolve:{
+        alias:{
+            // 'vue$':'vue/dist/vue.js', //解决Vue单文件组件不能使用template的问题
+            '@':path.resolve('src'),
+            '@@':path.resolve('src/components'),
+            '~':path.resolve('src/pages'),
+        },
+        extensions:['.js', '.jsx']
+    },
+
+
     // 加载器
     module:{
         rules:[

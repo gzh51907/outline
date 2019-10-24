@@ -257,7 +257,8 @@
     * 纯函数：
         * 内部不会改变传入的参数，相同的参数得到同样的结果
         * 内部没有自己的状态
-    *
+    * ES7装饰器
+        * 
     ```js
         function pf(num){
             return num**2
@@ -275,3 +276,21 @@
     * Mounting      挂载阶段
     * Updating      更新阶段
     * Unmounting    卸载阶段
+
+
+## day6-4
+
+### 复习
+* babel
+    * plugin
+        * @babel/plugin-proposal-decorators
+        * @babel/plugin-proposal-class-properties
+    * webpack
+    * .babelrc
+
+
+### 知识点
+* webpack
+    ```js
+        import Vue from 'vue'
+    ```
