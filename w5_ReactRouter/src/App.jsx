@@ -17,6 +17,10 @@ import Home from '~/Home';
 import Discover from '~/Discover';
 import Reg from '~/Reg';
 import Login from '~/Login';
+import Goods from '~/Goods/index';
+import Cart from '~/Cart';
+
+import './App.scss';
 
 const NotFound = function () {
     return (
@@ -69,6 +73,11 @@ class App extends Component{
                 path: '/discover',
                 text: '发现',
                 icon: 'eye'
+            }, {
+                name: 'cart',
+                path: '/cart',
+                text: '购物车',
+                icon: 'shopping-cart'
             }, {
                 name: 'reg',
                 path: '/reg',
@@ -123,6 +132,7 @@ class App extends Component{
                         selected:[key]
                     })
                 }}
+                theme="dark"
                 >
                     {
                         menu.map(item=><Menu.Item key={item.path}>
@@ -140,6 +150,8 @@ class App extends Component{
                     <Route path="/discover" component={Discover} />
                     <Route path="/reg" component={Reg} />
                     <Route path="/login" component={Login} />
+                    <Route path="/cart" component={Cart} />
+                    <Route path="/goods/:id" component={Goods} />
                     {/* <Route path="/" component={Home} exact /> */}
                     <Redirect from="/" to="/home" exact/>
                     <Route render={() => <div><h1>404</h1>页面不存在</div>} />

@@ -1,0 +1,11 @@
+.price{
+    span{
+        color:#f00;margin:0 5px;
+        &::before{
+            content:'￥'
+        }
+    }
+    del::before{
+        content:'￥'
+    }
+}

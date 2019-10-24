@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 
-import { Carousel } from 'antd';
+import { Carousel,Row,Col } from 'antd';
 
 import Api from '@/Api';
 
 class Home extends Component {
     state = {
-        recommend:[]
+        recommend:[],
+        datalist:[]
     }
+    goto = (id)=>{
+        let {history} = this.props
+        history.push(`/goods/${id}`);
+    }
+
     async componentDidMount() {
         let {datas} = await Api.get({
             act: 'index'
@@ -15,14 +21,18 @@ class Home extends Component {
 
         let recommend = datas[0].adv_list.item;
 
+        // 格式化数据
+        let datalist = datas.slice(1).map(item=>item.goods);
+
         this.setState({
-            recommend
+            recommend,
+            datalist
         })
 
 
     }
     render() {
-        let {recommend} = this.state;
+        let {recommend,datalist} = this.state;
         return (
             <div>
                 <Carousel>
@@ -34,6 +44,35 @@ class Home extends Component {
                         })
                     }
                 </Carousel>
+                <div style={{padding:10}}>
+                {
+                    datalist.map(item=>{
+                        return <div>
+                            <h4>{item.title}</h4>
+                            <Row gutter={30}>
+                                {
+                                    item.item.map(goods=>{
+                                        return <Col 
+                                        style={{minHeight:280}}
+                                        xs={12}
+                                        sm={6}
+                                        md={4}
+                                        onClick={this.goto.bind(this,goods.goods_id)}
+                                        >
+                                            <img src={goods.goods_image} style={{width:'100%'}}/>
+                                            <h5>{goods.goods_name}</h5>
+                                            <p className="price">
+                                                <del>{goods.goods_price}</del>
+                                                <span>{goods.goods_promotion_price}</span>
+                                            </p>
+                                        </Col>
+                                    })
+                                }
+                            </Row>
+                        </div>
+                    })
+                }
+                </div>
             </div>
         )
     }
