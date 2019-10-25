@@ -294,3 +294,18 @@
     ```js
         import Vue from 'vue'
     ```
+
+## day6-5
+
+### 知识点
+* redux
+    * 核心概念 
+        * Store 仓库
+        * State 真正存放数据的地方
+        * Reducer
+            * 作用：用于定义修改state方式，必须返回一个新的state
+            * 原则:复制一份，并覆盖
+        * Action
+    * 在React组件中操作store
+        * 获取：`store.getState()`
+        * 修改：`store.dispatch(action)`

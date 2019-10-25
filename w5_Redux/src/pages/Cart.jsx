@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { List,InputNumber,Avatar,Icon,Button,Tooltip,Row,Col,Divider} from 'antd'
 
-import store from '@/store';
-
 class Cart extends Component {
     state = {
         goodslist: [{
@@ -44,8 +42,8 @@ class Cart extends Component {
         })
     }
     componentDidMount() {
-        // 添加商品
-        // store.dispatch({type:'ADD_TO_CART',goods:{id,name,price,qty}})
+
+
 
     }
     render() {
