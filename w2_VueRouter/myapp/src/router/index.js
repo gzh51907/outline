@@ -50,10 +50,26 @@ let router = new VueRouter({
                 requiresAuth:true
             }
         },
+
+        // '/discover'
         {
             name: 'discover',
             path: '/discover',
             component: Discover,
+            children:[
+                // discover/phone
+                // {
+                //     name:'phone',
+                //     path:'phone',
+                //     component:Phone
+                // },
+                // // discover/computer
+                // {
+                //     name:'computer',
+                //     path:'computer',
+                //     component:Computer
+                // }
+            ],
             beforeEnter(to,from,next){
                 console.log('Discover.beforeEnter')
                 next();

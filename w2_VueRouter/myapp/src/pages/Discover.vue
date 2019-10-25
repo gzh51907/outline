@@ -1,6 +1,7 @@
 <template>
     <div>
         发现
+        <router-view/>
     </div>
 </template>
 <script>

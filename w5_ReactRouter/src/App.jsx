@@ -155,7 +155,6 @@ class App extends Component{
                     {/* <Route path="/" component={Home} exact /> */}
                     <Redirect from="/" to="/home" exact/>
                     <Route render={() => <div><h1>404</h1>页面不存在</div>} />
-    
                 </Switch>
             </div>
         )

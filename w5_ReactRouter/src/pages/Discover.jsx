@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 
-import { Tabs } from 'antd';
+import { Tabs, Switch } from 'antd';
+import {Route} from 'react-router-dom';
 
 import Api from '@/Api';
+
+import List from './List'
 
 class Discover extends Component {
     state = {
@@ -13,20 +16,23 @@ class Discover extends Component {
         }
     }
     changeType = async (gc_id)=>{
-        let {tabData} = this.state;
-        let {datas} = await Api.get({
-            act:'goods_class',
-            op:'get_child_all',
-            gc_id
-        });
+        let {history} = this.props;
 
-        // let tabId = datas.class_list[0].gc_id;
-        let data = datas.class_list[0].child
-        tabData[gc_id] = data;
+        // let {tabData} = this.state;
+        // let {datas} = await Api.get({
+        //     act:'goods_class',
+        //     op:'get_child_all',
+        //     gc_id
+        // });
 
-        this.setState({
-            tabData
-        })
+        // // let tabId = datas.class_list[0].gc_id;
+        // let data = datas.class_list[0].child
+        // tabData[gc_id] = data;
+
+        // this.setState({
+        //     tabData
+        // })
+        history.push('/discover/'+gc_id)
 
 
     }
@@ -45,6 +51,7 @@ class Discover extends Component {
     }
     render() {
         let {menu,activeKey,tabData} = this.state;
+        let {match} = this.props
         return (
             <div>
                 <Tabs 
@@ -55,7 +62,7 @@ class Discover extends Component {
                     {menu.map((item,idx) => (
                         <Tabs.TabPane tab={item.gc_name} key={item.gc_id}>
                             
-                            {
+                            {/* {
                                 tabData[item.gc_id] ? 
                                 <Tabs 
                                     tabPosition='left'
@@ -71,8 +78,8 @@ class Discover extends Component {
                                 </Tabs>
                                 :
                                 '无数据'
-                            }
-                            
+                            } */}
+                            <Route path={match.path+"/:gc_id"} component={List} />
                             
                         </Tabs.TabPane>
                     ))}
