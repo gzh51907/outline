@@ -35,10 +35,10 @@ const NotFound = function () {
 // import store from '@/store';
 
 // 用户获取state数据
-const mapStateToProps = function(state){
+const mapStateToProps = function({user,cart}){
     // state：store下的state，等效于store.getState()
     return {
-        cartlength:state.goodslist.length
+        cartlength:cart.goodslist.length
     };
 }
 

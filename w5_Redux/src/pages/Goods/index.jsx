@@ -5,21 +5,26 @@ import {Icon,Button} from 'antd';
 import './Goods.scss';
 import {connect} from 'react-redux';
 
+import Action from '@/store/action'
+
 let Style = {
     container:{padding:15}
 }
-const mapStateToProps = state=>{
+const mapStateToProps = ({cart})=>{
     return {
-        goodslist:state.goodslist
+        goodslist:cart.goodslist
     }
 }
 const mapDispathToProps = dispatch=>{
+
     return {
         add2cart(payload){
-            dispatch({type:'ADD_TO_CART',payload})
+            // dispatch({type:'ADD_TO_CART',payload})
+            dispatch(Action.cart.add(payload));
         },
         changeQty(goods_id,goods_qty){
-            dispatch({type:'CHANGE_QTY',payload:{goods_id,goods_qty}})
+            // dispatch({type:'CHANGE_QTY',payload:{goods_id,goods_qty}})
+            dispatch(Action.cart.changeQty(goods_id,goods_qty));
         },
         dispatch
     }

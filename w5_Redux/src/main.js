@@ -5,7 +5,7 @@ import App from './App.jsx';
 import {Provider} from 'react-redux';
 import store from './store'
 
-let MyContext = React.createContext()
+// let MyContext = React.createContext()
 
 render(
     <Provider store={store}>

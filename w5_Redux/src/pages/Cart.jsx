@@ -1,44 +1,71 @@
 import React, { Component } from 'react';
 import { List, InputNumber, Avatar, Icon, Button, Tooltip, Row, Col, Divider } from 'antd'
-
+import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
-const mapStateToProps = state => ({
-    goodslist: state.goodslist,
-    totalPrice:state.goodslist.reduce((prev,item)=>prev+item.goods_price*item.goods_qty,0)
+
+import cartAction from '../store/action/cart'
+
+
+const mapStateToProps = ({cart}) => ({
+    goodslist: cart.goodslist,
+    totalPrice:cart.goodslist.reduce((prev,item)=>prev+item.goods_price*item.goods_qty,0)
 });
 const mapDispatchToProps = dispatch => {
-    return {
-        changeQty(goods_id, goods_qty) {
-            console.log(goods_id, goods_qty);
-            dispatch({
-                type: 'CHANGE_QTY',
-                payload: {
-                    goods_id, goods_qty
-                }
-            })
-        },
-        removeItem(goods_id) {
-            dispatch({
-                type: 'REMOVE_FROM_CART',
-                payload: goods_id
-            })
-        },
-        clearCart() {
+    // return {
+    //     changeQty(goods_id, goods_qty) {
+    //         console.log(goods_id, goods_qty);
+    //         // dispatch({
+    //         //     type: 'CHANGE_QTY',
+    //         //     payload: {
+    //         //         goods_id, goods_qty
+    //         //     }
+    //         // })
+    //         dispatch(cartAction.changeQty(goods_id, goods_qty))
+    //     },
+    //     removeItem(goods_id) {
+    //         // dispatch({
+    //         //     type: 'REMOVE_FROM_CART',
+    //         //     payload: goods_id
+    //         // })
+    //         dispatch(cartAction.remove(goods_id))
+    //     },
+    //     clearCart() {
+    //         // dispatch({
+    //         //     type: 'CLEAR_CART'
+    //         // })
+    //         dispatch(cartAction.clear(goods_id))
+    //     }
+    // }
 
-        }
-    }
+    return bindActionCreators(cartAction,dispatch);//{add,remove,clear,changeQty}
+    // 等效于
+    // return {
+    //     add(goods){
+    //         dispatch(add(goods))
+    //     },
+    //     remove(id){
+    //         dispatch(remove(id))
+    //     },
+    //     clear(){
+    //         dispatch(clear())
+    //     },
+    //     changeQty(goods_id,goods_qty){
+    //         dispatch(changeQty(goods_id,goods_qty))
+    //     }
+    // }
 }
 @connect(mapStateToProps, mapDispatchToProps)
 class Cart extends Component {
 
 
     componentDidMount() {
-
+        console.log('Cart.props',this.props)
 
 
     }
     render() {
-        let { goodslist, changeQty, removeItem,totalPrice } = this.props;
+        // let { goodslist, changeQty, removeItem,totalPrice,clearCart } = this.props;
+        let { goodslist, changeQty, remove,totalPrice,clear } = this.props;
         return (
             <div style={{ padding: 15 }}>
                 <List
@@ -56,7 +83,7 @@ class Cart extends Component {
                                     ></Button> */}
                                     <Icon type="delete" 
                                     style={{ color: '#f00' }}
-                                    onClick={removeItem.bind(this,item.goods_id)}
+                                    onClick={remove.bind(this,item.goods_id)}
                                     />
                                 </Tooltip>]}
                         >
@@ -81,7 +108,7 @@ class Cart extends Component {
                 <Divider />
                 <Row>
                     <Col span={12}>
-                        <Button type="danger" icon="delete">清空购物车</Button>
+                        <Button type="danger" icon="delete" onClick={clear}>清空购物车</Button>
                     </Col>
                     <Col span={12} style={{ textAlign: 'right' }}>
                         总价：<span className="price"><span>{totalPrice}</span></span>

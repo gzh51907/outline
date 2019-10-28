@@ -41,7 +41,36 @@
         // 在React组件中修改state
         store.dispatch({type:'xxx',payload:'xxx'})
     ```
+
+## 知识点
+
+* Redux模块化
+* ActionCreator
+    * 创建一个action
+    * bindActionCreators：把ActionCreator中的所有方法(export default中的方法)绑定到组件props并自动隐式调用dispatch(action)
+    ```js
+        // 模拟actionCreators
+            return bindActionCreators(cartAction,dispatch);//{add,remove,clear,changeQty}
+
+            function bindActionCreators(Actions,dispatch){
+                let res = {}
+                for(let key in Actions){
+                    res[key] = function(){
+                        dispatch(Actions[key](...arguments))
+                    }
+                }
+                return res
+            }
+    ```
 * React-redux
     * 原理：context + HOC
     * 内置组件: `<Provider store={store}/>`
     * 高阶组件：`connect()()`
+
+
+* Redux学习流程：Redux -> React-Redux(Context+HOC)->redux模块化 -> ActionCreator -> bindActionCreator
+
+
+* React中如何做权限管理
+    * user信息需要redux共享
+    * HOC+shouldComponentUpdate()
