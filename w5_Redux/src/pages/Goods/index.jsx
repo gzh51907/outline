@@ -3,31 +3,52 @@ import React,{Component} from 'react';
 import Api from '@/Api';
 import {Icon,Button} from 'antd';
 import './Goods.scss';
-
-import store from '@/store';
-store.subscribe(()=>{
-    console.log('subscribe:',store.getState())
-})
+import {connect} from 'react-redux';
 
 let Style = {
     container:{padding:15}
 }
+const mapStateToProps = state=>{
+    return {
+        goodslist:state.goodslist
+    }
+}
+const mapDispathToProps = dispatch=>{
+    return {
+        add2cart(payload){
+            dispatch({type:'ADD_TO_CART',payload})
+        },
+        changeQty(goods_id,goods_qty){
+            dispatch({type:'CHANGE_QTY',payload:{goods_id,goods_qty}})
+        },
+        dispatch
+    }
+}
 
+@connect(mapStateToProps,mapDispathToProps)
 class Goods extends Component{
     state = {
         data:{}
     }
     addToCart = ()=>{
+        let {goodslist,add2cart,changeQty} = this.props
         let {goods_name,goods_id,goods_image,goods_price} = this.state.data;
-        store.dispatch({type:'ADD_TO_CART',payload:{
-            goods_name,
-            goods_id,
-            goods_image,
-            goods_price,
-            goods_qty:1
-        }})
+
+        // 判断商品是否存在购物车
+        // 存在：数量+1
+        // 不存在：添加到购物车
+        let currentGoods = goodslist.filter(item=>item.goods_id===goods_id)[0];
+
+        if(currentGoods){
+            changeQty(goods_id,currentGoods.goods_qty+1)
+        }else{
+            add2cart({goods_name,goods_id,goods_image,goods_price,goods_qty:1})
+
+        }
+
+
     }
-    async componentDidMount() {
+    async componentDidMount() {console.log('Goods.props:',this.props)
         let {match} = this.props;
         // 接收goods_id
         let goods_id = match.params.id;

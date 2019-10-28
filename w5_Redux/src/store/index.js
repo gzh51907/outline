@@ -43,7 +43,7 @@ function reducer(state=initialState,{type,payload}){
         case 'REMOVE_FROM_CART':
             return {
                 ...state,
-                goodslist:state.goodslist.filter(item=>item.id!=payload)
+                goodslist:state.goodslist.filter(item=>item.goods_id!=payload)
             }
 
         // {type:'CHANGE_QTY',payload:{id,qty}}
@@ -51,8 +51,8 @@ function reducer(state=initialState,{type,payload}){
             return {
                 ...state,
                 goodslist:state.goodslist.map(item=>{
-                    if(item.id == payload.id){
-                        item.qty=payload.qty
+                    if(item.goods_id == payload.goods_id){
+                        item.goods_qty=payload.goods_qty
                     }
                     return item;
                 })
