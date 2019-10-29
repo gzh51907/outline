@@ -74,3 +74,14 @@
 * React中如何做权限管理
     * user信息需要redux共享
     * HOC+shouldComponentUpdate()
+
+* redux中间件
+    * redux-saga
+        * Generator
+        * Iterator
+            * next() => {value,done}
+    * action分类
+        * reduxAction
+        * sagaAction
+    * 处理多个中间件
+

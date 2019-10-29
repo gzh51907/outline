@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 
 import { Carousel,Row,Col } from 'antd';
 
+import {connect} from 'react-redux';
+
 import Api from '@/Api';
 
+@connect()
 class Home extends Component {
     state = {
         recommend:[],
@@ -29,7 +32,9 @@ class Home extends Component {
             datalist
         })
 
-
+        // 触发sagaAction
+        // this.props.dispatch({type:'CHANGE_QTY',payload:{goods_id,goods_qty}});//字节进入reducer
+        this.props.dispatch({type:'GET_DATA_ASYNC'});//字节进入saga中间件
     }
     render() {
         let {recommend,datalist} = this.state;
