@@ -19,6 +19,7 @@ Router.use((req, res, next) => {
 // 引入每个模块路由
 const goodsRouter = require('./goods');
 const userRouter = require('./user');
+const uploadRouter = require('./upload');
 
 Router.use(express.urlencoded({extended:true}),express.json());//推导：内部自动调用next
 
@@ -32,5 +33,7 @@ Router.get('/verify',(req,res)=>{
 
     res.send(formatData({code:result?1:0}))
 });
+
+Router.use('/upload',uploadRouter);
 
 module.exports = Router

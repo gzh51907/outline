@@ -21,6 +21,7 @@ import Reg from '~/Reg';
 import Login from '~/Login';
 import Goods from '~/Goods/index';
 import Cart from '~/Cart';
+import Upload from '~/Upload';
 
 import './App.scss';
 
@@ -150,6 +151,7 @@ class App extends Component {
                     <Route path="/login" component={Login} />
                     <Route path="/cart" component={Cart} />
                     <Route path="/goods/:id" component={Goods} />
+                    <Route path="/upload" component={Upload} />
                     {/* <Route path="/" component={Home} exact /> */}
                     <Redirect from="/" to="/home" exact />
                     <Route render={() => <div><h1>404</h1>页面不存在</div>} />
