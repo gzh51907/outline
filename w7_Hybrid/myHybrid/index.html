@@ -22,11 +22,11 @@
 		                <p class='mui-ellipsis'>拍照、录像、扫码</p>
 		            </div>
 		    </li>
-		    <li class="mui-table-view-cell mui-media">
-		            <i class="mui-media-object mui-pull-left mui-icon mui-icon-camera"></i>
+		    <li class="mui-table-view-cell mui-media btnConcat">
+		            <i class="mui-media-object mui-pull-left mui-icon mui-icon-contact"></i>
 		            <div class="mui-media-body">
-		                	<h4>摄像头</h4>
-		                <p class='mui-ellipsis'>拍照、录像、扫码</p>
+		                	<h4>通讯录</h4>
+		                <p class='mui-ellipsis'>打电话、发邮件</p>
 		            </div>
 		    </li>
 		    <li class="mui-table-view-cell mui-media">
@@ -41,31 +41,33 @@
 	    <div class="result">展示区域</div>
     </div>
 	<script type="text/javascript" charset="utf-8">
-      	mui.init();
-      	document.addEventListener('plusready',()=>{
-      		let btnCamera = document.querySelector('.btnCamera');
-      		let result = document.querySelector('.result');
-	      	btnCamera.onclick = ()=>{
-	      		let camera = plus.camera;
-	      		
-	      		let cmr = camera.getCamera();console.log(JSON.stringify(cmr))
-	      		
-	      		cmr.captureImage((path)=>{
-	      			console.log('path:'+path)
-	      			let realPath = plus.io.convertLocalFileSystemURL(path);
-	      			console.log('realPath:'+realPath)
-	      			let img = document.createElement('img');
-	      			img.src = realPath;
-	      			result.appendChild(img)
-	      		});
-	      		
-	      		
-	      	}
-      	})
-//    	mui.ready(()=>{
-//    		
-//    	})
-      	
+//    	mui.init({
+////    		swipeBack:true,
+//    		keyEventBind: {
+//				backbutton: true,  //Boolean(默认true)关闭back按键监听
+////				menubutton: true   //Boolean(默认true)关闭menu按键监听
+//			},
+//    	});
+//    	
+      	mui.plusReady(function(){
+		     let btnCamera = document.querySelector('.btnCamera');
+		     let btnConcat = document.querySelector('.btnConcat');
+		     btnCamera.onclick = ()=>{
+		     	//创建webview
+		     	let pageCamera = plus.webview.create( 'html/camera.html', 'pageCamera');
+		     	
+		     	//显示webview
+		     	plus.webview.show( pageCamera,'slide-in-right');
+		     }
+		     
+		     btnConcat.onclick = ()=>{
+		     	//创建webview
+		     	let pageCamera = plus.webview.create( 'html/concat.html', 'pageConcat');
+		     	
+		     	//显示webview
+		     	plus.webview.show( pageCamera,'slide-in-right');
+		     }
+		});
     </script>
 </body>
 </html>

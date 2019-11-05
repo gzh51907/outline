@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="../js/mui.min.js"></script>
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+</head>
+<body>
+	<h1>所有联系人</h1>
+	<button type="button" class="mui-btn mui-btn-primary btnPhone">手机联系人</button>
+	<button type="button" class="mui-btn mui-btn-success btnSIM">SIM卡联系人</button>
+	
+	<div>
+		<ul class="mui-table-view" id="result">
+		   
+		</ul>
+	</div>
+	
+	<script type="text/javascript" charset="UTF-8">
+		function dial(number){
+			plus.device.dial(number,false)
+		}
+      	mui.plusReady(()=>{
+      		let btnPhone = document.querySelector('.btnPhone');
+      		let btnSIM = document.querySelector('.btnSIM');
+      		let result = document.querySelector('#result')
+      		
+      		btnPhone.onclick = ()=>{
+      			 plus.contacts.getAddressBook( plus.contacts.ADDRESSBOOK_PHONE, (addressbook )=>{
+      			 	addressbook.find(['displayName','nickname','name.givenName','phoneNumbers'],(data)=>{
+      			 		console.log(JSON.stringify(data));
+      			 		
+      			 		result.innerHTML = data.map(item=>{
+      			 			return `<li class="mui-table-view-cell"">
+      			 				 <a class="mui-navigate-right">${item.displayName}：${item.phoneNumbers.map(item=>`<span onclick="dial(${item.value})">${item.value}</span>`)}</a>
+      			 				</li>`
+      			 		})
+      			 	})
+      			 	
+      			 });
+      		}
+      		
+      		
+      	})
+    </script>
+</body>
+</html>
