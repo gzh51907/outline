@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="../js/mui.min.js"></script>
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+</head>
+<body>
+	<div id="goodsInfo">
+		<img src="../img/jingjing.png" />
+		<h1>不要998，值要98就可把婧婧带回家！</h1>
+	</div>
+	<button type="button" id="btnShare" class="mui-btn mui-btn-success mui-btn-outlined">分享</button>
+	<button type="button" id="btnSysShare" class="mui-btn mui-btn-success mui-btn-outlined">系统分享</button>
+	<script type="text/javascript" charset="UTF-8">
+		let btnShare = document.querySelector('#btnShare')
+		let btnSysShare = document.querySelector('#btnSysShare')
+		let goodsInfo = document.querySelector('#goodsInfo')
+      	mui.plusReady(()=>{
+      		let content = {
+				type:'web',
+				title:goodsInfo.children[1].innerText,
+				thumbs:[goodsInfo.children[0].src],
+				content:goodsInfo.children[1].innerText,
+				href:'http://52.198.113.252:1919'
+			}
+      		
+      		btnShare.onclick = ()=>{
+      			//获取支持的分享方式
+      			plus.share.getServices((services)=>{
+      				console.log(JSON.stringify(services))
+      				
+      				let buttons = services.map(item=>{
+      					return {
+      						title:item.description
+      					}
+      				})
+      				
+      				//显示分享菜单
+      				plus.nativeUI.actionSheet({
+						title:'分享到',
+						cancel:'取消',
+						buttons
+      				}, ({index})=>{
+      					console.log(index)
+      					if(index==0) return;
+      					
+      					//获取当前分享通道
+      					let current = services[index-1];
+      					
+      					
+      					
+      					if(!current.authenticated){
+							current.authorize(function(){
+								current.send(content,()=>{
+		      						plus.nativeUI.toast('分享成功');
+		      					})
+							}, function(e){
+								console.log("未进行认证");
+							} )
+						}
+      					
+      					
+      					current.send(content,()=>{
+      						plus.nativeUI.toast('分享成功');
+      					})
+      				});
+      			});
+      		}
+      		
+      		
+      		btnSysShare.onclick = ()=>{
+      			plus.share.sendWithSystem(content, ()=>{
+      				plus.nativeUI.toast('分享成功');
+      			});
+      		}
+      	})
+    </script>
+</body>
+</html>

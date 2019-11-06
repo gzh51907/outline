@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="../js/mui.min.js"></script>
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=x4RLsqK9mFnB0Vf3QiNLvSMAVmuhWqPe"></script>
+    <style type="text/css">
+    	#bdmap{height:100vh;}
+    </style>
+</head>
+<body>
+
+	<div id="bdmap">
+		
+	</div>
+	
+	<script type="text/javascript" charset="UTF-8">
+		var map = new BMap.Map("bdmap");    // 创建Map实例
+		map.centerAndZoom("广州",19);  
+		map.enableScrollWheelZoom(true);
+		
+		//添加全景控件
+		map.addTileLayer(new BMap.PanoramaCoverageLayer());
+		var stCtrl = new BMap.PanoramaControl(); //构造全景控件
+		stCtrl.setOffset(new BMap.Size(20, 20));
+		map.addControl(stCtrl);
+      	mui.plusReady(()=>{console.log('plusReady')
+      		let bdmap = document.querySelector('#bdmap')
+      		
+      		// 获取当前经纬度
+      		plus.geolocation.getCurrentPosition((position)=>{
+      			console.log('position:')
+      			console.log(JSON.stringify(position))
+      			let {coords} = position;
+      			let {longitude,latitude} = coords;
+      			let point = new BMap.Point(longitude,latitude)
+      			map.centerAndZoom(point,18);
+      			
+      			var marker = new BMap.Marker(point);  // 创建标注
+				map.addOverlay(marker);               // 将标注添加到地图中
+				
+				setTimeout(()=>{
+					marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+				},1000)
+				
+				plus.push.createMessage( '定位成功');
+				
+      		},(error)=>{
+      			console.log('fail'+error.message)
+      		});
+//    		map.centerAndZoom(new BMap.Point(116.331398,39.897445),19);
+      	})
+    </script>
+</body>
+</html>
