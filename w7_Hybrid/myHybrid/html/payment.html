@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="../js/mui.min.js"></script>
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <style>
+    	.price del{color:#999;margin-right:5px;}
+    	.price del::before,.price span::before{
+    		content:'￥'
+    	}
+    	.price span{color:#f00;}
+    </style>
+</head>
+<body>
+	<div id="goodsInfo">
+		<img src="../img/jingjing.png" />
+		<h1>不要998，值要98就可把婧婧带回家！</h1>
+		<p class="price">价格：<del>998.00</del><span>0.01</span></p>
+		<input type="number" id="qty" value="1" />
+		<button type="button" class="mui-btn mui-btn-danger" id="btnAlipay">支付宝支付</button>
+		<button type="button" class="mui-btn mui-btn-success" id="btnWxpay">微信支付</button>
+	</div>
+	<script type="text/javascript" charset="UTF-8">
+		let btnAlipay = document.querySelector('#btnAlipay')
+		let btnWxpay = document.querySelector('#btnWxpay')
+		let qty = document.querySelector('#qty')
+		let goodsInfo = document.querySelector('#goodsInfo')
+      	mui.plusReady(()=>{
+      		let channels=null;
+      		plus.payment.getChannels((cls)=>{
+      			console.log(JSON.stringify(cls))
+      			channels = cls
+      		});
+      		
+      		let paymentApi = 'http://demo.dcloud.net.cn/payment/?payid=';
+      		
+      		// 支付宝支付
+      		btnAlipay.onclick = ()=>{
+      			let payid = 'alipay'
+      			request(payid)
+      			
+      			
+      			
+      		}
+      		
+      		//微信支付
+      		btnWxpay.onclick = ()=>{
+      			let payid = 'wxpay'
+      			request(payid)
+      		}
+      		
+      		function request(payid){
+      			let current = channels.filter(item=>item.id===payid)[0];
+      			if(current && current.serviceReady){
+      				let totalPrice = goodsInfo.querySelector('.price span').innerText*qty.value;
+      				var appid = plus.runtime.appid;
+      				paymentApi += payid + '&total='+totalPrice + '&appid='+appid;
+      				
+      				//给后端发起请求，获取加密后的信息
+	      			var xhr = new XMLHttpRequest();
+	      			xhr.onload = function(){
+						 var order = xhr.responseText; console.log(order)
+						 
+						 plus.payment.request(current,order,(result)=>{
+							 console.log(result)
+						 },(err)=>{
+							 console.log(err)
+						 })
+					}
+					xhr.open('get',paymentApi,true);
+					xhr.send()
+      			}
+      			
+      		}
+      	})
+    </script>
+</body>
+</html>

@@ -107,6 +107,9 @@
 		},
         "Share": {
 			"description": "分享"
+		},
+		"Payment": {
+			"description": "支付"
 		}
 	},
 	"plus": {

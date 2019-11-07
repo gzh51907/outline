@@ -50,6 +50,13 @@
 		                <p class='mui-ellipsis'>分享朋友圈、qq空间、微博...</p>
 		            </div>
 		    </li>
+		    <li class="mui-table-view-cell mui-media btnPayment">
+		            <i class="mui-media-object mui-pull-left mui-icon mui-icon-spinner mui-spin"></i>
+		            <div class="mui-media-body">
+		                	<h4>支付</h4>
+		                <p class='mui-ellipsis'>微信，支付宝等支付</p>
+		            </div>
+		    </li>
 	    </ul>
     </div>
 	<script type="text/javascript" charset="utf-8">
@@ -104,6 +111,14 @@
 		     	let pageShare = plus.webview.create( 'html/share.html', 'pageShare');
 
 		     	plus.webview.show( pageShare,'slide-in-right');
+
+				
+		     }
+		     document.querySelector('.btnPayment').onclick = ()=>{
+		     	//创建webview
+		     	let pagePament = plus.webview.create( 'html/payment.html', 'pagePament');
+
+		     	plus.webview.show( pagePament,'slide-in-right');
 
 				
 		     }
