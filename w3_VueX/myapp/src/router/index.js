@@ -8,15 +8,24 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 // 引入页面组件
-import Home from '../pages/Home.vue';
-import Cart from '../pages/Cart.vue';
-import Reg from '../pages/Reg.vue';
-import Login from '../pages/Login.vue';
-import NotFound from '../pages/NotFound.vue';
-import Discover from '../pages/Discover.vue';
-import Mine from '../pages/Mine.vue';
-import Goods from '../pages/Goods.vue';
+// import Home from '../pages/Home.vue';
+// import Cart from '../pages/Cart.vue';
+// import Reg from '../pages/Reg.vue';
+// import Login from '../pages/Login.vue';
+// import NotFound from '../pages/NotFound.vue';
+// import Discover from '../pages/Discover.vue';
+// import Mine from '../pages/Mine.vue';
+// import Goods from '../pages/Goods.vue';
 import store from '../store';
+
+const Home = ()=>import('../pages/Home.vue');
+const Cart = ()=>import('../pages/Cart.vue');
+const Reg = ()=>import('../pages/Reg.vue');
+const Login = ()=>import('../pages/Login.vue');
+const NotFound = ()=>import('../pages/NotFound.vue');
+const Discover = ()=>import('../pages/Discover.vue');
+const Mine = ()=>import('../pages/Mine.vue');
+const Goods = ()=>import('../pages/Goods.vue');
 
 // 3. 实例化router并配置参数
 let router = new VueRouter({
