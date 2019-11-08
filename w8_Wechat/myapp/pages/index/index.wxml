@@ -1,13 +1,10 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+<view>
+  <swiper indicator-dots autoplay>
+    <swiper-item wx:for="{{recommend}}" wx:key="song_id" data-id="{{item.song_id}}" bind:tap="goto">
+      <!-- <navigator url="/pages/player/player"> -->
+      <image src="{{item.pic_s500}}" style="width:100%;" />
+      <!-- </navigator> -->
+    </swiper-item>
+  </swiper>
 </view>

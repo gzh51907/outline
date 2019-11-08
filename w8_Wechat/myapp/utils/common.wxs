@@ -1,0 +1,6 @@
+function show(){
+  console.log('show')
+  return 666;
+}
+
+module.exports.show = show;

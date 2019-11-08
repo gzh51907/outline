@@ -1,13 +1,10 @@
 //index.js
 //获取应用实例
 const app = getApp()
-
+console.log('app:',app)
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    recommend:[]
   },
   //事件处理函数
   bindViewTap: function() {
@@ -15,34 +12,60 @@ Page({
       url: '../logs/logs'
     })
   },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
+  goto(e){
+    let {id} = e.currentTarget.dataset
+    wx.navigateTo({
+      url: '/pages/player/player?song_id='+id,
+    })
+  },
+  onShow(){
+    console.log('Index.onShow')
+  },
+  onHide(){
+    console.log('Index.onHide')
+  },
+  onUnload(){
+    console.log('Index.onUnload')
+  },
+  onReady() {
+    console.log('Index.onReady')
+  },
+  onLoad: function () {console.log('Index.onload')
+    wx.request({
+      url:"http://tingapi.ting.baidu.com/v1/restserver/ting",
+      data:{
+        method:'baidu.ting.billboard.billList' ,
+         type:1,
+         size:10,
+         offset:0
+      },
+      success:({data})=>{
+        console.log('res',data)
         this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
+          recommend:data.song_list
         })
       }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
+    })
+  },
+
+  onPullDownRefresh(){
+    console.log('onPullDownRefresh')
+  },
+
+  onReachBottom(){
+    console.log('onReachBottom','加载更多数据')
+  },
+
+  onShareAppMessage(res){
+    console.log(res);
+
+    return {
+      title:"分享给xxx",
+      path:'/pages/list/list',
+      imageUrl:'http://e.hiphotos.baidu.com/image/h%3D300/sign=a9e671b9a551f3dedcb2bf64a4eff0ec/4610b912c8fcc3cef70d70409845d688d53f20f7.jpg'
     }
   },
+
   getUserInfo: function(e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo

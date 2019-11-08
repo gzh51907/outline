@@ -19,3 +19,4 @@
 .usermotto {
   margin-top: 200px;
 }
+.title{color:#f00;font-size:20px;}
