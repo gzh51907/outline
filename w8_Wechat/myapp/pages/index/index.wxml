@@ -1,10 +1,47 @@
 <!--index.wxml-->
+<!--引入模板文件-->
+<import src="/template.wxml" />
+
 <view>
   <swiper indicator-dots autoplay>
-    <swiper-item wx:for="{{recommend}}" wx:key="song_id" data-id="{{item.song_id}}" bind:tap="goto">
+    <swiper-item wx:for="{{recommend}}" wx:key="song_id" data-songid="{{item.song_id}}" bind:tap="gotoPlayer">
       <!-- <navigator url="/pages/player/player"> -->
       <image src="{{item.pic_s500}}" style="width:100%;" />
       <!-- </navigator> -->
     </swiper-item>
   </swiper>
+
+  <!-- 搜索 -->
+  <view class="weui-search-bar__form" bind:tap="gotoSearch">
+    <view class="weui-search-bar__box">
+      <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+      <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{keyword}}" />
+    </view>
+    <label class="weui-search-bar__label">
+      <icon class="weui-icon-search" type="search" size="14"></icon>
+      <view class="weui-search-bar__text">{{keyword}}</view>
+    </label>
+  </view>
+
+  <!-- tab标签切换 -->
+  <!-- tab标签切换 -->
+  <view class="weui-tab">
+    <view class="weui-navbar">
+      <block wx:for="{{tabs}}" wx:key="type">
+        <view data-idx="{{index}}" data-type="{{item.type}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bind:tap="handlerTabChange">
+          <view class="weui-navbar__title">{{item.text}}</view>
+        </view>
+      </block>
+      <view class="weui-navbar__slider" style="width: {{tabWidth}}px; transform: translateX({{sliderOffset}}px); "></view>
+    </view>
+    <view class="weui-tab__panel">
+      <view wx:for="{{tabs}}" wx:key="type" class="weui-tab__content" hidden="{{activeIndex != index}}">
+        <template is="list" data="{{datalist:tabData[item.type]}}" />
+        <template is="more" data="{{type:item.type}}" />
+      </view>
+    </view>
+  </view>
+
+  <template is="panel" data="{{datalist:classicSong,title:'经典老歌',type:22,more:true}}"/>
+  <template is="panel" data="{{datalist:loveSong,title:'情歌对唱',type:23,more:true}}"/>
 </view>

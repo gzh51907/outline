@@ -41,9 +41,27 @@ App({
     console.log('onHide')
   },
   globalData: {
-    userInfo: null
+    // 分类数据，用于首页tab标签切换效果
+    types: [{
+      type: 1,
+      text: '新歌',
+      title: '新歌榜'
+    }, {
+      type: 16,
+      text: '流行',
+      title: '流行音乐'
+    }, {
+      type: 21,
+      text: '欧美',
+      title: '欧美金曲'
+    }, {
+      type: 25,
+      text: '网络',
+      title: '网络神曲'
+    }, {
+      type: 11,
+      text: '摇滚',
+      title: '摇滚重金属'
+    }]
   },
-  currentClass:{
-    name:'h51907'
-  }
 })

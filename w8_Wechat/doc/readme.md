@@ -24,5 +24,8 @@
         </wxs>
     ```
 * tabBar页面 与 普通页面的区别
-
-···
+* 在微信小程序中使用async&await
+    > regeneratorRuntime
+* 在微信小程序中使用npm
+* 事件处理函数不能使用async函数
+* 重点：模板的使用<template>

@@ -1,10 +1,21 @@
 //index.js
+const regeneratorRuntime = require('regenerator-runtime');
+
 //获取应用实例
 const app = getApp()
+
 console.log('app:',app)
 Page({
   data: {
-    recommend:[]
+    recommend:[],
+    keyword:'',
+    tabs: app.globalData.types,
+    tabData: {},// tab标签切换的数据{1:[],2:[],11:[]},
+    tabWidth:0, //tab高亮线条长度
+    sliderOffset: 0,// 高亮线条偏移位置
+    activeIndex:0,
+    classicSong:[],
+    loveSong:[]
   },
   //事件处理函数
   bindViewTap: function() {
@@ -12,39 +23,99 @@ Page({
       url: '../logs/logs'
     })
   },
-  goto(e){
-    let {id} = e.currentTarget.dataset
+  goto(url) {
     wx.navigateTo({
-      url: '/pages/player/player?song_id='+id,
+      url
     })
   },
-  onShow(){
-    console.log('Index.onShow')
+  gotoPlayer(e){
+    let {songid} = e.currentTarget.dataset
+    let path = '/pages/player/player?songid='+songid
+    this.goto(path)
   },
-  onHide(){
-    console.log('Index.onHide')
+  
+  gotoSearch(){
+    let path = '/pages/search/search?keyword=' + this.data.keyword
+    this.goto(path);
   },
-  onUnload(){
-    console.log('Index.onUnload')
+  getData(type){
+    return new Promise((resolve,reject)=>{
+      wx.request({
+        url: "http://tingapi.ting.baidu.com/v1/restserver/ting",
+        data: {
+          method: 'baidu.ting.billboard.billList',
+          type,
+          size: 10,
+          offset: 0
+        },
+        success: ({ data }) => {
+          resolve(data)
+        },
+        fail(err){
+          reject(err)
+        }
+      })
+    })
+    
   },
-  onReady() {
-    console.log('Index.onReady')
+
+  handlerTabChange(e){
+    let {idx} = e.currentTarget.dataset;
+    let {tabWidth,tabs} = this.data;
+    let sliderOffset = idx*tabWidth;
+    this.setData({
+      sliderOffset,
+      activeIndex:idx
+    });
+
+    this.getTabData(idx);
   },
-  onLoad: function () {console.log('Index.onload')
-    wx.request({
-      url:"http://tingapi.ting.baidu.com/v1/restserver/ting",
-      data:{
-        method:'baidu.ting.billboard.billList' ,
-         type:1,
-         size:10,
-         offset:0
-      },
-      success:({data})=>{
-        console.log('res',data)
-        this.setData({
-          recommend:data.song_list
-        })
-      }
+  async getTabData(idx){
+    let { tabs, tabData} = this.data;
+    // 请求当前Tab数据
+    let type = tabs[idx].type;
+    let {song_list} = await this.getData(type);
+
+    tabData[type] = song_list;
+
+    this.setData({
+      tabData
+    })
+  },
+  onLoad: async function () {
+    let { tabs, tabData, activeIndex} = this.data;
+
+    // 设置Tab标签切换参数
+    const res = wx.getSystemInfoSync();
+    // let tabWidth = 750 / this.data.tabs.length; // rpx
+    let tabWidth = res.windowWidth / this.data.tabs.length; //px
+    let sliderOffset;
+    
+    // 推荐数据（轮播图）
+    let { song_list: recommend} = await this.getData(1);
+
+    // 搜索数据
+    let {song_list:hotlist} = await this.getData(2);
+
+    // tab数据
+    // {tabData}
+    this.getTabData(activeIndex);
+
+    // 情歌对唱
+    let { song_list: loveSong } = await this.getData(23);
+
+    // 经典老歌
+    let { song_list: classicSong } = await this.getData(22);
+
+    // 按hot排序
+    hotlist.sort((a,b)=>b.hot-a.hot);
+    console.log(hotlist)
+    this.setData({
+      recommend,
+      keyword: hotlist[0].title,
+      tabWidth,
+      classicSong,
+      loveSong
     })
   },
 
