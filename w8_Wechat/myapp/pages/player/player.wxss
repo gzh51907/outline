@@ -1,1 +1,2 @@
-/* pages/player/player.wxss */
+.player image{width:100%}
+.weui-btn{width:100%;display:block;}

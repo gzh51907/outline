@@ -29,3 +29,21 @@
 * 在微信小程序中使用npm
 * 事件处理函数不能使用async函数
 * 重点：模板的使用<template>
+* HTML新特性Audio
+    ```js
+        <audio src/>
+
+        let player = new Audio();
+        player.src = 'xxx';
+
+        if(player.paused){
+            player.play()
+        }else{
+            player.pause()
+        }
+
+        player.ontimeupdate = function(){
+            
+        }
+        
+    ```

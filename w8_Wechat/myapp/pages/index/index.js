@@ -38,14 +38,14 @@ Page({
     let path = '/pages/search/search?keyword=' + this.data.keyword
     this.goto(path);
   },
-  getData(type){
+  getData(type,size=10){
     return new Promise((resolve,reject)=>{
       wx.request({
         url: "http://tingapi.ting.baidu.com/v1/restserver/ting",
         data: {
           method: 'baidu.ting.billboard.billList',
           type,
-          size: 10,
+          size,
           offset: 0
         },
         success: ({ data }) => {
@@ -61,20 +61,24 @@ Page({
 
   handlerTabChange(e){
     let {idx} = e.currentTarget.dataset;
-    let {tabWidth,tabs} = this.data;
+    let {tabWidth,tabs,tabData} = this.data;
     let sliderOffset = idx*tabWidth;
     this.setData({
       sliderOffset,
       activeIndex:idx
     });
 
-    this.getTabData(idx);
+    // 已请求过的tabData数据，不再进行请求
+    if (tabData[tabs[idx].type] === undefined){
+      this.getTabData(idx);
+    }
+
   },
   async getTabData(idx){
     let { tabs, tabData} = this.data;
     // 请求当前Tab数据
     let type = tabs[idx].type;
-    let {song_list} = await this.getData(type);
+    let {song_list} = await this.getData(type,5);
 
     tabData[type] = song_list;
 

@@ -21,7 +21,11 @@
 
 <template name="panel">
   <view class="weui-panel weui-panel_access">
-    <view class="weui-panel__hd" wx:if="{{title}}" data-type="{{type}}" bindtap="gotoList">{{title}}</view>
+    <view class="weui-panel__hd" wx:if="{{title}}">
+     <navigator url="/pages/list/list?type={{type}}">
+      {{title}}
+    </navigator>
+    </view>
     <view class="weui-panel__bd">
       <template is="list" data="{{datalist}}" />
     </view>
