@@ -1,0 +1,1 @@
+<view class="content" bind:__l="__l"><image class="logo _img" src="/static/logo.png"></image><view><text class="title">{{title}}</text></view><view class="_strong">text</view><view class="_h1">使用html标签</view><button data-event-opts="{{[['tap',[['handler',['$event']]]]]}}" bindtap="__e">点我</button></view>
