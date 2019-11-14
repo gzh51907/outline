@@ -6,6 +6,7 @@ module.exports = {
     output:{
         path:path.join( __dirname,'./dist'),
         filename:'js/bundle-[name]-[hash:5].js',
+        publicPath:'/',//打包后出现路径问题解决方案
     },
     devServer:{
         contentBase:path.join( __dirname,'./src'),
