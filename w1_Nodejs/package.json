@@ -17,6 +17,6 @@
     "express": "^4.17.1",
     "http-proxy-middleware": "^0.20.0",
     "request": "^2.88.0",
-    "ws": "^7.1.2"
+    "ws": "^7.4.6"
   }
 }
